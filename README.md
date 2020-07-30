@@ -26,7 +26,6 @@
       - Allow the user to Delete each item in the table
       - Allow the user to Log in so they can see their own data.
 
-
 ---
 
 ## Tools Used
