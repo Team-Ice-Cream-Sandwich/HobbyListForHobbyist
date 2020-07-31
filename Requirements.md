@@ -111,8 +111,8 @@
 1. Each base user can change the state of each model (un-built, built, or painted)
 
 ### Data Flow
-- After the user logs in
-- The use would be given a series of options of how they want to manipulate their data.
+- After the user logs in, the controller gives the user a JWT token which would give them authorization to make requests to the app.
+- The user would be given a series of options of how they want to manipulate their data.
 - User decided to add a model
     - They are prompted to fill in a form that has the details of the model they want to add.
         - They must select the state the model is in (un-built, built, or painted).
@@ -141,7 +141,7 @@
 ### Non-Functional Requirements (requirements that are not directly related to the functionality)
 1. Security-
     - Don't allow the user's personal information to be displayed anywhere.
-    - Don't ever save the user's password in plain text.
+    - Don't ever save the user's password in plain text. (salting and hashing)
     - Separate the users information from each other.
 1. Testability-
     - Be able to test each route independently
