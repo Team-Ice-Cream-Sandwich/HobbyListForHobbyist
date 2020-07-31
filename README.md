@@ -1,12 +1,12 @@
 # HobbyList For Hobbyists
----
-### We are deployed on Azure! TODO
 
-[project url here]
+
+- [User Stories and Requirements](Requirements.md)
+
 
 ---
 ## Web Application
-- Hobbyist’s Best Friend (Trello for model building)
+- Hobbyist's Best Friend (Trello for model building)
     - Summary of idea: A web application that allows a user to keep track of all the models and supplies that they own and want.
 - What problem or pain point does it solve? 
     - As a modeler it is hard to keep track of the paints and the tools that we currently own and the supplies that we need to buy for the next project. 
@@ -26,7 +26,6 @@
       - Allow the user to Delete each item in the table
       - Allow the user to Log in so they can see their own data.
 
-
 ---
 
 ## Tools Used
@@ -42,7 +41,7 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 
 ---
 
-## Getting Started
+## Getting Started TODO
 
 Clone this repository to your local machine.
 
@@ -94,28 +93,36 @@ dotnet run
 ---
 ## Model Properties and Requirements TODO
 
-### Blog TODO
+### MiniModel
 
-| Parameter | Type | Required |
-| --- | --- | --- |
-| ID  | int | YES |
-| Summary | string | YES |
-| Content | string | YES |
-| Tags | string(s) | NO |
-| Picture | img jpeg/png | NO |
-| Sentiment | float | NO |
-| Keywords | string(s) | NO |
-| Related Posts | links | NO |
-| Date | date/time object | YES |
+ Parameter | Type 
+ --- | --- 
+ Id  | int 
+ Name | string 
+ Manufacturer | string
+ PartNumber | string
+ Faction | string
+ PointCost | int
+ BuildState | (enum)
+ UserId | string
 
+### Paints
 
-### User TODO
+Parameter | Type 
+--- | --- 
+Id  | int 
+ColorName | string
+Manufacturer | string
+ProductNumber | string
+UserId | string
 
-| Parameter | Type | Required |
-| --- | --- | --- |
-| ID  | int | YES |
-| Name/Author | string | YES |
-| Posts | list | YES |
+### Supplies
+Parameter | Type
+--- | ---
+Name | string
+Category | string
+UserId | string
+
 
 ---
 
