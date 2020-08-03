@@ -82,7 +82,8 @@ namespace HobbyListForHobbyist.Models.Services
         // DeleteAPaint
         public async Task Delete(int id)
         {
-            var paint = _context.Paints.FindAsync(id);
+            var paint = await _context.Paints.FindAsync(id);
+
             _context.Entry(paint).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
