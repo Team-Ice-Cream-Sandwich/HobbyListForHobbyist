@@ -9,7 +9,7 @@ namespace HobbyListForHobbyist.Models
     {
         // Properties
         public int MiniModelId { get; set; }
-        public int SuppliedId { get; set; }
+        public int SupplyId { get; set; }
 
         // Nav Properties
         public List<MiniToSupply> MinisToSupply { get; set; }

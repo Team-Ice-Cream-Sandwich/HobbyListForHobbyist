@@ -21,6 +21,7 @@ namespace HobbyListForHobbyist.Data
 
             // ============= TODO declare JoinTable's compositeKeys here ============================
             modelBuilder.Entity<MiniToPaint>().HasKey(x => new { x.MiniModelId, x.PaintId });
+            modelBuilder.Entity<MiniToSupply>().HasKey(x => new { x.MiniModelId, x.SupplyId });
             // ======== TODO seed the database with info here ======================
             modelBuilder.Entity<MiniModel>().HasData(
                  new MiniModel
