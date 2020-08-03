@@ -12,7 +12,7 @@ namespace HobbyListForHobbyist.Models
         public int SupplyId { get; set; }
 
         // Nav Properties
-        public List<MiniToSupply> MinisToSupply { get; set; }
-        public List<Supply> Supply { get; set; }
+        public MiniModel MiniModel { get; set; }
+        public Supply Supply { get; set; }
     }
 }

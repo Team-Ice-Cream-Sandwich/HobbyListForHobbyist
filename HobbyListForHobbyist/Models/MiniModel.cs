@@ -21,12 +21,12 @@ namespace HobbyListForHobbyist.Models
         public List<MiniToSupply> MinisToSupplies { get; set; }
         public List<MiniToPaint> MinisToPaints { get; set; }
     }
-    }
-
-    public enum BuildState
-    {
-        unBuilt = 0,
-        built,
-        painted
-    }
 }
+
+public enum BuildState
+{
+    unBuilt = 0,
+    built,
+    painted
+}
+
