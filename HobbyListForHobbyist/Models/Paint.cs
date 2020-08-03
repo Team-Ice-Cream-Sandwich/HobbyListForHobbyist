@@ -10,6 +10,7 @@ namespace HobbyListForHobbyist.Models
         // Properties
         public int Id { get; set; }
         public string ColorName { get; set; }
+        public string Manufacturer { get; set; }
         public string ProductNumber { get; set; }
         public int UserId { get; set; }
         // Nav Properties
