@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using HobbyListForHobbyist.Data;
 using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.Interfaces;
 using HobbyListForHobbyist.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HobbyListForHobbyist
 {
@@ -30,9 +33,9 @@ namespace HobbyListForHobbyist
         public void ConfigureServices(IServiceCollection services)
         {
             // ========================= TODO Install Newtonsoft into project then uncomment ======================
-            //services.AddControllers(/*TODO add options AuthorizeFilter() after building and testing routes in controllers*/).AddNewtonSoftJson(options =>
-            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //);
+            services.AddControllers(/*TODO add options AuthorizeFilter() after building and testing routes in controllers*/).AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             // =============================  TODO Uncomment when DbContext is built
             //services.AddDbContext<HobbyListDbContext>(options =>
@@ -41,40 +44,38 @@ namespace HobbyListForHobbyist
             //});
 
             // ============================== TODO Install and use Identity ==================================
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //        .AddEntityFrameworkStores<AsyncInnDbContext>()
-            //        .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<HobbyListDbContext>()
+                    .AddDefaultTokenProviders();
 
-            //services.AddAuthentication(options =>
-            //{
-            //    // Must define the JWT Bearer defaults
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //.AddJwtBearer(options =>
-            //{
-            //    // Define the JwtBearer's parameters
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = false,
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        ValidIssuer = Configuration["JWTIssuer"],
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTKey"]))
-            //    };
-            //});
+            services.AddAuthentication(options =>
+            {
+                // Must define the JWT Bearer defaults
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                // Define the JwtBearer's parameters
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JWTIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTKey"]))
+                };
+            });
 
             // ======================== TODO Change the name of the roles ============================
             //// add my policies
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("TopLevelPrivileges", policy => policy.RequireRole(ApplicationRoles.DistrictManager));
-            //    options.AddPolicy("ElevatedPrivileges", policy => policy.RequireRole(ApplicationRoles.DistrictManager, ApplicationRoles.PropertyManager));
-            //    options.AddPolicy("BottomLevelPrivileges", policy => policy.RequireRole(ApplicationRoles.DistrictManager, ApplicationRoles.PropertyManager, ApplicationRoles.Agent));
-            //    //can also use policy.RequireClaim("FavoriteColor");
-            //});
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("TopLevelPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("GenericPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin, ApplicationRoles.User)); 
+            });
 
             services.AddTransient<IMiniModel, MiniModelService>();
             services.AddTransient<IPaint, PaintService>();
