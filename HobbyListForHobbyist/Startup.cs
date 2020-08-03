@@ -34,7 +34,7 @@ namespace HobbyListForHobbyist
         public void ConfigureServices(IServiceCollection services)
         {
             // ========================= TODO Install Newtonsoft into project then uncomment ======================
-            services.AddControllers(/*TODO add options AuthorizeFilter() after building and testing routes in controllers*/).AddNewtonsoftJson(options =>
+            services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
