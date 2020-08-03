@@ -12,17 +12,16 @@ namespace HobbyListForHobbyist.Data
     {
         public HobbyListDbContext(DbContextOptions<HobbyListDbContext> options) : base(options)
         {
-            // Intentially left Blank
+            // Intentionally left Blank
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // ============= TODO declare JoinTable's compositeKeys here ============================
             modelBuilder.Entity<MiniToPaint>().HasKey(x => new { x.MiniModelId, x.PaintId });
             modelBuilder.Entity<MiniToSupply>().HasKey(x => new { x.MiniModelId, x.SupplyId });
-            // ======== TODO seed the database with info here ======================
+
             modelBuilder.Entity<MiniModel>().HasData(
                  new MiniModel
                 {
@@ -80,7 +79,6 @@ namespace HobbyListForHobbyist.Data
 
         }
 
-        // ================ TODO Connect the DB with the model classes. 
         public DbSet<MiniModel> MiniModels { get; set; }
         public DbSet<MiniToPaint> MinisToPaint { get; set; }
         public DbSet<MiniToSupply> MinisToSupply { get; set; }

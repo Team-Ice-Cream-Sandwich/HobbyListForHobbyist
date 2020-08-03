@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,10 +39,10 @@ namespace HobbyListForHobbyist
             );
 
             // =============================  TODO Uncomment when DbContext is built
-            //services.AddDbContext<HobbyListDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            //});
+            services.AddDbContext<HobbyListDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             // ============================== TODO Install and use Identity ==================================
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -97,10 +98,10 @@ namespace HobbyListForHobbyist
 
 
             // ====================== TODO Build out ApplicationUser Class ======================
-            //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             // ====================== TODO Build out RoleInitializer Class ======================
-            // RoleInitilaizer.SeeData(serviceProvider, userManager, Configuration);
+            RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
 
             app.UseEndpoints(endpoints =>
             {

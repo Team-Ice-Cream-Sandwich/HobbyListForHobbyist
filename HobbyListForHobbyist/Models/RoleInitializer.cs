@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +19,7 @@ namespace HobbyListForHobbyist.Models
             new IdentityRole{Name = ApplicationRoles.User, NormalizedName = ApplicationRoles.User.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()}
         };
 
-        public static void SeedDate(IServiceProvider serviceProvider, UserManager<ApplicationUser> users, IConfiguration _config)
+        public static void SeedData(IServiceProvider serviceProvider, UserManager<ApplicationUser> users, IConfiguration _config)
         {
             using (var dbContext = new HobbyListDbContext(serviceProvider.GetRequiredService<DbContextOptions<HobbyListDbContext>>()))
             {
