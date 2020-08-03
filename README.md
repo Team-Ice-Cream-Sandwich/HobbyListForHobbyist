@@ -127,7 +127,8 @@ UserId | string
 ---
 
 ## Change Log
- - 0.10 Repo Build and README started
+- 0.20 Scaffold Models
+- 0.10 Repo Build and README started
 
 ---
 
