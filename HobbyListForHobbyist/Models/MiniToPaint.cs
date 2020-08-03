@@ -7,8 +7,12 @@ namespace HobbyListForHobbyist.Models
 {
     public class MiniToPaint
     {
-        // Properties
+        // Composite key
+        public int MiniModelId { get; set; }
+        public int PaintId { get; set; }
 
         // Nav Properties
+        public Paint Paint { get; set; }
+        public MiniModel MiniModel { get; set; }
     }
 }
