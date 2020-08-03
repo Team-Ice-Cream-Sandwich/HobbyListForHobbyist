@@ -42,7 +42,7 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetASupply
-        public async Task<SupplyDTO> GetSupply(SupplyDTO supplyName, int supplyId)
+        public async Task<SupplyDTO> GetSupply(int supplyId)
         {
             var supplyItem = await _context.Supply.FindAsync(supplyId);
             SupplyDTO supply = new SupplyDTO()
@@ -61,9 +61,9 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
         }
         // DeleteASupply
-        public async Task Delete(SupplyDTO supplyName, int supplyId)
+        public async Task Delete(int supplyId)
         {
-            var supply = await GetSupply(supplyName, supplyId);
+            var supply = await GetSupply(supplyId);
             _context.Entry(supply).State = EntityState.Deleted;
         }
     }

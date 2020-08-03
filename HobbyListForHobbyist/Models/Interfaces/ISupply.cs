@@ -14,10 +14,10 @@ namespace HobbyListForHobbyist.Models.Interfaces
         // GetAllSupplies
         Task<List<SupplyDTO>> GetSupplies();
         // GetASupply
-        Task<SupplyDTO> GetSupply(SupplyDTO supplyName, int supplyId);
+        Task<SupplyDTO> GetSupply(int supplyId);
         // UpdateASupply
         Task Update(int supplyId, SupplyDTO supplyName);
         // DeleteASupply
-        Task Delete(SupplyDTO supplyName, int supplyId);
+        Task Delete(int supplyId);
     }
 }
