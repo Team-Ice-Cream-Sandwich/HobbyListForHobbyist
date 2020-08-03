@@ -1,18 +1,25 @@
-﻿using System;
+﻿using HobbyListForHobbyist.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models.Interfaces
 {
-    interface IMiniModel
+    public interface IMiniModel
     {
         // ================== TODO ===========================
         // CreateAMiniModel
-        // GetAllMiniModels
-        // GetAllMiniModelsOfState
-        // GetAMiniModel
-        // UpdateAMiniModel
-        // DeleteAMiniModel
+        //Task<MiniModelDTO> Create(MiniModelDTO miniModel);
+        //// GetAllMiniModels
+        //Task<MiniModelDTO> GetMiniModel(int id);
+        //// GetAllMiniModelsOfState
+        //Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState);
+        //// GetAMiniModel
+        //Task<List<MiniModelDTO>> GetAllMiniModels();
+        //// UpdateAMiniModel
+        //Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id);
+        //// DeleteAMiniModel
+        //Task Delete(int id);
     }
 }
