@@ -45,10 +45,10 @@ namespace HobbyListForHobbyist.Controllers
         }
 
         // GET: api/MiniModels/BuildState/built
-        [HttpGet("/BuildState/{buildState}")]
+        [HttpGet("BuildState/{buildState}")]
         public async Task<ActionResult<IEnumerable<MiniModelDTO>>> GetMiniModelsOfState(BuildState buildState)
         {
-            List<MiniModelDTO> miniModels = await _miniModel.GetAMiniModelOfState(buildState);
+            var miniModels = await _miniModel.GetAMiniModelOfState(buildState);
 
             return miniModels;
         }

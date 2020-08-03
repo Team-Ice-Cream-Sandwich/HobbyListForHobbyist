@@ -14,7 +14,7 @@ namespace HobbyListForHobbyist.Models
         public string ProductNumber { get; set; }
         public int UserId { get; set; }
         // Nav Properties
-        public List<MiniToPaint> MiniToPaints { get; set; }
+        public List<MiniToPaint> MinisToPaint { get; set; }
 
        
     }

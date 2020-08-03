@@ -52,9 +52,11 @@ namespace HobbyListForHobbyist.Models.Services
             MiniModel miniModel = await _context.MiniModels.FindAsync(id);
 
             var paintList = await _context.MinisToPaint.Where(x => x.MiniModelId == id)
+                                                        .Include(x=>x.Paint)
                                                         .ToListAsync();
 
             var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == id)
+                                                            .Include(x=>x.Supply)
                                                             .ToListAsync();
 
             // ============ TODO: Needs Testing =============
@@ -67,7 +69,7 @@ namespace HobbyListForHobbyist.Models.Services
 
             foreach (var item in suppliesList)
             {
-                supplies.Add(await _supply.GetSupply(item.Supply.Id));
+                supplies.Add(await _supply.GetSupply(1));
             }
 
 
