@@ -83,6 +83,7 @@ namespace HobbyListForHobbyist.Data
         public DbSet<MiniToPaint> MinisToPaint { get; set; }
         public DbSet<MiniToSupply> MinisToSupply { get; set; }
         public DbSet<Paint> Paints { get; set; }
+        public DbSet<Supply> Supply { get; set; }
 
     }
 }
