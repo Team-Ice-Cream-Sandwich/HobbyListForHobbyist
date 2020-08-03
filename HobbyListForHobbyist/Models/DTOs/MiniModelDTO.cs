@@ -7,6 +7,12 @@ namespace HobbyListForHobbyist.Models.DTOs
 {
     public class MiniModelDTO
     {
-        // ================== TODO ===========================
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Manufacturer { get; set; }
+        public string PartNumber { get; set; }
+        public string Faction { get; set; }
+        public int PointCost { get; set; }
+        public string BuildState { get; set; }
     }
 }
