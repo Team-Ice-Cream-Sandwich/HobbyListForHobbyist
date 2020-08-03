@@ -7,9 +7,18 @@ namespace HobbyListForHobbyist.Models
 {
     public class MiniModel
     {
-        // Properties
+        //Properties
+        public string Name { get; set; }
+        public string Manufacturer { get; set; }
+        public string PartNumber { get; set; }
+        public string Faction { get; set; }
+        public int PointCost { get; set; }
+        public string UserId { get; set; }
 
         // Nav Properties
+        public List<MinisToSupplies> MinisToSupplies { get; set; }
+        public List<MiniToPaint> MinisToPaints { get; set; }
+    }
     }
 
     public enum BuidState
