@@ -14,5 +14,7 @@ namespace HobbyListForHobbyist.Models.DTOs
         public string Faction { get; set; }
         public int PointCost { get; set; }
         public string BuildState { get; set; }
+        public List<PaintDTO> Paints { get; set; }
+        public List<SupplyDTO> Supplies { get; set; }
     }
 }

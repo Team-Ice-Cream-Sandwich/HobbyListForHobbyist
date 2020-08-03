@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models.Interfaces
 {
-    interface IPaint
+    public interface IPaint
     {
         // ================== TODO ===========================
         // CreateAPaint

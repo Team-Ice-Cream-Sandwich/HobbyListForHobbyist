@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models.Interfaces
 {
-    interface IMiniModel
+    public interface IMiniModel
     {
         // ================== TODO ===========================
         // CreateAMiniModel

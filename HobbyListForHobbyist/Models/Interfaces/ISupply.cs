@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models.Interfaces
 {
-    interface ISupply
+    public interface ISupply
     {
         // ================== TODO ===========================
         // CreateASupply
