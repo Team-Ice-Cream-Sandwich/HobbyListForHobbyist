@@ -64,7 +64,6 @@ namespace HobbyListForHobbyist.Models
                     userManager.AddToRoleAsync(user, ApplicationRoles.User).Wait();
                 }
             }
-
         }
 
         private static void AddRoles(HobbyListDbContext context)
