@@ -127,6 +127,11 @@ UserId | string
 ---
 
 ## Change Log
+- 0.70 Supply, Paint and MiniModel controllers finished
+- 0.60 Interfaces and Services
+- 0.50 DTOs complete
+- 0.40 DbContext Complete
+- 0.30 Models Complete
 - 0.20 Scaffold Models
 - 0.10 Repo Build and README started
 

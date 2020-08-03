@@ -8,16 +8,15 @@ namespace HobbyListForHobbyist.Models.Interfaces
 {
     public interface ISupply
     {
-        // ================== TODO ===========================
         //CreateAllSupplies
         Task<SupplyDTO> Create(SupplyDTO supplyName);
         // GetAllSupplies
         Task<List<SupplyDTO>> GetSupplies();
         // GetASupply
-        Task<SupplyDTO> GetSupply(SupplyDTO supplyName, int supplyId);
+        Task<SupplyDTO> GetSupply(int supplyId);
         // UpdateASupply
-        Task Update(int supplyId, SupplyDTO supplyName);
+        Task<SupplyDTO> Update(SupplyDTO supplyDTO);
         // DeleteASupply
-        Task Delete(SupplyDTO supplyName, int supplyId);
+        Task Delete(int supplyId);
     }
 }

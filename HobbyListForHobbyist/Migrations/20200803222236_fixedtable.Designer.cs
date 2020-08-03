@@ -4,14 +4,16 @@ using HobbyListForHobbyist.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HobbyListForHobbyist.Migrations
 {
     [DbContext(typeof(HobbyListDbContext))]
-    partial class HobbyListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200803222236_fixedtable")]
+    partial class fixedtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,20 +256,6 @@ namespace HobbyListForHobbyist.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Supplies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Category = "Cutting",
-                            Name = "Snipps"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Category = "Glue",
-                            Name = "Plastiweld"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -410,7 +398,7 @@ namespace HobbyListForHobbyist.Migrations
                         .IsRequired();
 
                     b.HasOne("HobbyListForHobbyist.Models.Paint", "Paint")
-                        .WithMany("MinisToPaint")
+                        .WithMany("MiniToPaints")
                         .HasForeignKey("PaintId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

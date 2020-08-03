@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HobbyListForHobbyist.Data;
 using HobbyListForHobbyist.Models;
+using HobbyListForHobbyist.Models.DTOs;
+using HobbyListForHobbyist.Models.Interfaces;
 
 namespace HobbyListForHobbyist.Controllers
 {
@@ -14,31 +16,25 @@ namespace HobbyListForHobbyist.Controllers
     [ApiController]
     public class SuppliesController : ControllerBase
     {
-        private readonly HobbyListDbContext _context;
+        private ISupply _supply;
 
-        public SuppliesController(HobbyListDbContext context)
+        public SuppliesController(ISupply supply)
         {
-            _context = context;
+            _supply = supply;
         }
 
         // GET: api/Supplies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Supply>>> GetSupply()
+        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply()
         {
-            return await _context.Supply.ToListAsync();
+            return await _supply.GetSupplies();
         }
 
         // GET: api/Supplies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Supply>> GetSupply(int id)
+        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId)
         {
-            var supply = await _context.Supply.FindAsync(id);
-
-            if (supply == null)
-            {
-                return NotFound();
-            }
-
+            SupplyDTO supply = await _supply.GetSupply(supplyId);
             return supply;
         }
 
@@ -46,65 +42,32 @@ namespace HobbyListForHobbyist.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSupply(int id, Supply supply)
+        public async Task<IActionResult> PutSupply(int supplyId, SupplyDTO supplyDTO)
         {
-            if (id != supply.Id)
+            if (supplyId != supplyDTO.Id)
             {
                 return BadRequest();
             }
-
-            _context.Entry(supply).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SupplyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var updatedSupply = await _supply.Update(supplyDTO);
+            return Ok(updatedSupply);
         }
 
         // POST: api/Supplies
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Supply>> PostSupply(Supply supply)
+        public async Task<ActionResult<SupplyDTO>> PostSupply(SupplyDTO supply)
         {
-            _context.Supply.Add(supply);
-            await _context.SaveChangesAsync();
-
+            await _supply.Create(supply);
             return CreatedAtAction("GetSupply", new { id = supply.Id }, supply);
         }
 
         // DELETE: api/Supplies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Supply>> DeleteSupply(int id)
+        public async Task<ActionResult<SupplyDTO>> DeleteSupply(int supplyId)
         {
-            var supply = await _context.Supply.FindAsync(id);
-            if (supply == null)
-            {
-                return NotFound();
-            }
-
-            _context.Supply.Remove(supply);
-            await _context.SaveChangesAsync();
-
-            return supply;
-        }
-
-        private bool SupplyExists(int id)
-        {
-            return _context.Supply.Any(e => e.Id == id);
+            await _supply.Delete(supplyId);
+            return NoContent();
         }
     }
 }
