@@ -66,9 +66,10 @@ namespace HobbyListForHobbyist.Models
 
         private static void AddRoles(HobbyListDbContext context)
         {
-            if (context.Roles.Any()) return;
+           if (context.Roles.Any()) 
+                return;
 
-            foreach(var role in Roles)
+            foreach (var role in Roles)
             {
                 context.Roles.Add(role);
                 context.SaveChanges();
