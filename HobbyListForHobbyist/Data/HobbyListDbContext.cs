@@ -24,25 +24,25 @@ namespace HobbyListForHobbyist.Data
 
             modelBuilder.Entity<MiniModel>().HasData(
                  new MiniModel
-                {
-                    Id = 1,
-                    Name = "Platoon Leader",
-                    Manufacturer = "Forge Fire",
-                    PartNumber = "111",
-                    Faction = "North Army",
-                    PointCost = 100,
-                    BuildState = BuildState.built
-                },
+                 {
+                     Id = 1,
+                     Name = "Platoon Leader",
+                     Manufacturer = "Forge Fire",
+                     PartNumber = "111",
+                     Faction = "North Army",
+                     PointCost = 100,
+                     BuildState = BuildState.built
+                 },
                  new MiniModel
                  {
-                    Id = 2,
-                    Name = "Heavy Support Squad",
-                    Manufacturer = "Forge Fire",
-                    PartNumber = "122",
-                    Faction = "South Army",
-                    PointCost = 75,
-                    BuildState = BuildState.painted
-                },
+                     Id = 2,
+                     Name = "Heavy Support Squad",
+                     Manufacturer = "Forge Fire",
+                     PartNumber = "122",
+                     Faction = "South Army",
+                     PointCost = 75,
+                     BuildState = BuildState.painted
+                 },
                   new MiniModel
                   {
                       Id = 3,
@@ -54,7 +54,7 @@ namespace HobbyListForHobbyist.Data
                       BuildState = BuildState.unBuilt
                   });
             modelBuilder.Entity<Paint>().HasData(
-                new Paint 
+                new Paint
                 {
                     Id = 1,
                     ColorName = "Gunmetal",
@@ -74,6 +74,20 @@ namespace HobbyListForHobbyist.Data
                     ColorName = "Alabaster",
                     Manufacturer = "Forge Fire",
                     ProductNumber = "78"
+                }
+                );
+            modelBuilder.Entity<Supply>().HasData(
+                new Supply
+                {
+                    Id = 1,
+                    Name = "Snipps",
+                    Category = "Cutting"
+                },
+                new Supply
+                {
+                    Id = 2,
+                    Name = "Plastiweld",
+                    Category = "Glue"
                 }
                 );
 
