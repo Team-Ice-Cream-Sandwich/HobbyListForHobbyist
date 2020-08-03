@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models
 {
-    public class SupplyToPaint
+    public class MiniToSupply
     {
         // Properties
+     
 
         // Nav Properties
+        
     }
 }

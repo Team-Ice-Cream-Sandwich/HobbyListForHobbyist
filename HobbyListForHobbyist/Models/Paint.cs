@@ -8,7 +8,13 @@ namespace HobbyListForHobbyist.Models
     public class Paint
     {
         // Properties
-
+        public int Id { get; set; }
+        public string ColorName { get; set; }
+        public string ProductNumber { get; set; }
+        public int UserId { get; set; }
         // Nav Properties
+        public List<MiniToPaint> MiniToPaints { get; set; }
+
+       
     }
 }
