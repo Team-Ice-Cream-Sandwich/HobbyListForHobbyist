@@ -20,15 +20,16 @@ namespace HobbyListForHobbyist.Models.Services
         // CreateASupply
         public async Task<SupplyDTO> Create(SupplyDTO supplyName)
         {
-            _context.Entry(supplyName).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            Supply supply = new Supply() { Name = supplyName.Name, Category = supplyName.Category };
+            _context.Entry(supply).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             await _context.SaveChangesAsync();
             return supplyName;
         }
         // GetAllSupplies
         public async Task<List<SupplyDTO>> GetSupplies()
         {
-            var supplies = await _context.Supply.ToListAsync();
-            List<SupplyDTO> dtos = new List<SupplyDTO>();
+            var supplies = await _context.Supplies.ToListAsync();
+            var dtos = new List<SupplyDTO>();
             foreach (var item in supplies)
             {
                 dtos.Add(new SupplyDTO()
@@ -42,9 +43,9 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetASupply
-        public async Task<SupplyDTO> GetSupply(SupplyDTO supplyName, int supplyId)
+        public async Task<SupplyDTO> GetSupply(int supplyId)
         {
-            var supplyItem = await _context.Supply.FindAsync(supplyId);
+            var supplyItem = await _context.Supplies.FindAsync(supplyId);
             SupplyDTO supply = new SupplyDTO()
             {
                 Id= supplyItem.Id,
@@ -55,15 +56,17 @@ namespace HobbyListForHobbyist.Models.Services
             return supply;
         }
         // UpdateASupply
-        public async Task Update(int supplyId, SupplyDTO supplyName)
+        public async Task<SupplyDTO> Update(SupplyDTO supplyDTO)
         {
-            _context.Entry(supplyName).State = EntityState.Modified;
+            Supply supply = new Supply() { Id = supplyDTO.Id, Name = supplyDTO.Name, Category = supplyDTO.Category };
+            _context.Entry(supply).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return supplyDTO;
         }
         // DeleteASupply
-        public async Task Delete(SupplyDTO supplyName, int supplyId)
+        public async Task Delete(int supplyId)
         {
-            var supply = await GetSupply(supplyName, supplyId);
+            var supply = await GetSupply(supplyId);
             _context.Entry(supply).State = EntityState.Deleted;
         }
     }
