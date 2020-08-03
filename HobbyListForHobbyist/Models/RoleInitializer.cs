@@ -20,7 +20,6 @@ namespace HobbyListForHobbyist.Models
             new IdentityRole{Name = ApplicationRoles.User, NormalizedName = ApplicationRoles.User.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()}
         };
 
-
         public static void SeedDate(IServiceProvider serviceProvider, UserManager<ApplicationUser> users, IConfiguration _config)
         {
             using (var dbContext = new HobbyListDbContext(serviceProvider.GetRequiredService<DbContextOptions<HobbyListDbContext>>()))
