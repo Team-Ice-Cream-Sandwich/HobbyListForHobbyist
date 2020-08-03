@@ -127,6 +127,7 @@ UserId | string
 ---
 
 ## Change Log
+- 0.70 Supply, Paint and MiniModel controllers finished
 - 0.60 Interfaces and Services
 - 0.50 DTOs complete
 - 0.40 DbContext Complete
