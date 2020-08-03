@@ -4,14 +4,16 @@ using HobbyListForHobbyist.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HobbyListForHobbyist.Migrations
 {
     [DbContext(typeof(HobbyListDbContext))]
-    partial class HobbyListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200803210100_databaseupdate")]
+    partial class databaseupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +255,7 @@ namespace HobbyListForHobbyist.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supplies");
+                    b.ToTable("Supply");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
