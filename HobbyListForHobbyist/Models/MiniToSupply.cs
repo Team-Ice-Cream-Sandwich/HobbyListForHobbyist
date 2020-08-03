@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models
 {
-    public class MiniToPaint
+    public class MiniToSupply
     {
-        // Composite key
+        // Properties
         public int MiniModelId { get; set; }
-        public int PaintId { get; set; }
+        public int SuppliedId { get; set; }
 
         // Nav Properties
-        public Paint Paint { get; set; }
-        public MiniModel MiniModel { get; set; }
+        public List<MiniToSupply> MinisToSupply { get; set; }
+        public List<Supply> Supply { get; set; }
     }
 }
