@@ -67,8 +67,9 @@ namespace HobbyListForHobbyist.Models.Services
         // DeleteASupply
         public async Task Delete(int supplyId)
         {
-            var supply = await GetSupply(supplyId);
+            Supply supply = await _context.Supplies.FindAsync(supplyId);
             _context.Entry(supply).State = EntityState.Deleted;
+           await  _context.SaveChangesAsync();
         }
     }
 }
