@@ -126,5 +126,10 @@ namespace HobbyListForHobbyist.Controllers
         {
             return User.Claims.First(x => x.Type == "UserId").Value;
         }
+
+        protected string GetUserEmail()
+        {
+            return User.Claims.First(x => x.Type == "Email").Value;
+        }
     }
 }

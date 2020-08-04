@@ -56,7 +56,7 @@ namespace HobbyListForHobbyist.Models.Services
                                                            .FirstOrDefaultAsync(x=>x.Id == id);
 
             var paintList = await _context.MinisToPaint.Where(x => x.MiniModelId == id)
-                                                       .Include(x=>x.Paint)
+                                                       .Include(x => x.Paint)
                                                        .ToListAsync();
 
             var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == id)
@@ -102,10 +102,12 @@ namespace HobbyListForHobbyist.Models.Services
             foreach (var mini in miniList)
             {
                 var paintList = await _context.MinisToPaint.Where(x => x.MiniModelId == mini.Id)
-                                                           .ToListAsync();
+                                                      .Include(x => x.Paint)
+                                                      .ToListAsync();
 
                 var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == mini.Id)
-                                                               .ToListAsync();
+                                                           .Include(x => x.Supply)
+                                                           .ToListAsync();
 
                 List<PaintDTO> paints = new List<PaintDTO>();
                 List<SupplyDTO> supplies = new List<SupplyDTO>();
@@ -148,10 +150,12 @@ namespace HobbyListForHobbyist.Models.Services
             foreach (var mini in miniList)
             {
                 var paintList = await _context.MinisToPaint.Where(x => x.MiniModelId == mini.Id)
-                                                        .ToListAsync();
+                                                      .Include(x => x.Paint)
+                                                      .ToListAsync();
 
                 var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == mini.Id)
-                                                                .ToListAsync();
+                                                           .Include(x => x.Supply)
+                                                           .ToListAsync();
 
              
                 List<PaintDTO> paints = new List<PaintDTO>();

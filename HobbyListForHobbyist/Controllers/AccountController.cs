@@ -110,7 +110,8 @@ namespace HobbyListForHobbyist.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("FirstName", user.FirstName),
                 new Claim("LastName", user.LastName),
-                new Claim("UserId", user.Id)
+                new Claim("UserId", user.Id),
+                new Claim("Email", user.Email)
             };
 
             foreach (var item in role)
