@@ -9,11 +9,13 @@ using HobbyListForHobbyist.Data;
 using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.DTOs;
 using HobbyListForHobbyist.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SuppliesController : ControllerBase
     {
         private ISupply _supply;
@@ -25,16 +27,16 @@ namespace HobbyListForHobbyist.Controllers
 
         // GET: api/Supplies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply()
+        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply(string userId)
         {
-            return await _supply.GetSupplies();
+            return await _supply.GetSupplies(userId);
         }
 
         // GET: api/Supplies/5
         [HttpGet("{supplyId}")]
-        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId)
+        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId, string userId)
         {
-            SupplyDTO supply = await _supply.GetSupply(supplyId);
+            SupplyDTO supply = await _supply.GetSupply(supplyId, userId);
             return supply;
         }
 
@@ -69,5 +71,10 @@ namespace HobbyListForHobbyist.Controllers
             await _supply.Delete(supplyId);
             return NoContent();
         }
+        protected string GetUserId()
+        {
+            return User.Claims.First(x => x.Type == "UserId").Value;
+        }
+
     }
 }

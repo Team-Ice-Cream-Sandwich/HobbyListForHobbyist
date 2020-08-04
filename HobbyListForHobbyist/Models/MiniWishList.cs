@@ -5,18 +5,20 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models
 {
-    public class Paint
+    public class MiniWishList
     {
-        // Properties
+        //Properties
         public int Id { get; set; }
-        public string ColorName { get; set; }
+        public string Name { get; set; }
         public string Manufacturer { get; set; }
-        public string ProductNumber { get; set; }
+        public string PartNumber { get; set; }
+        public string Faction { get; set; }
+        public int PointCost { get; set; }
+        public decimal Price { get; set; }
         public string UserId { get; set; }
 
         // Nav Properties
-        public List<MiniToPaint> MinisToPaint { get; set; }
-
+        public MiniModel MiniModel{ get; set; }
        
     }
 }

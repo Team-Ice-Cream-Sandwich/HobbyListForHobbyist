@@ -9,6 +9,7 @@ using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.DTOs;
 using HobbyListForHobbyist.Models.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController : ControllerBase
     {
 
@@ -36,6 +38,7 @@ namespace HobbyListForHobbyist.Controllers
         // register
         // POST: api/account/register
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
             ApplicationUser user = new ApplicationUser()
@@ -50,12 +53,7 @@ namespace HobbyListForHobbyist.Controllers
 
             if (result.Succeeded)
             {
-                if (User.IsInRole("User") && register.Role == "Admin")
-                {
-                    return BadRequest("You are not authorized to do that.");
-                }
-
-                await _userManager.AddToRoleAsync(user, register.Role);
+                await _userManager.AddToRoleAsync(user, "User");
 
                 await _signInManager.SignInAsync(user, false);
 
@@ -68,6 +66,7 @@ namespace HobbyListForHobbyist.Controllers
         // Login
         // POST: api/account/Login
         [HttpPost("Login")]
+        [AllowAnonymous]
         public async Task<ActionResult> Login(LoginDTO login)
         {
             var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
@@ -93,6 +92,7 @@ namespace HobbyListForHobbyist.Controllers
         // assign roles
         // POST: api/assign/role
         [HttpPost("assign/role")]
+        [Authorize(Policy = "AdminPrivileges")]
         public async Task AssignRoleToUser(AssignRoleDTO assignment)
         {
             var user = await _userManager.FindByEmailAsync(assignment.Email);
@@ -110,7 +110,8 @@ namespace HobbyListForHobbyist.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("FirstName", user.FirstName),
                 new Claim("LastName", user.LastName),
-                new Claim("UserId", user.Id)
+                new Claim("UserId", user.Id),
+                new Claim("Email", user.Email)
             };
 
             foreach (var item in role)
@@ -138,7 +139,6 @@ namespace HobbyListForHobbyist.Controllers
 
             return token;
         }
-
 
     }
 }

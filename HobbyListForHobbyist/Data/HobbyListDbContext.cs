@@ -12,7 +12,7 @@ namespace HobbyListForHobbyist.Data
     {
         public HobbyListDbContext(DbContextOptions<HobbyListDbContext> options) : base(options)
         {
-            // Intentionally left Blank
+            // IntentC:\Users\yasmo\Source\Repos\HobbyListForHobbyist\HobbyListForHobbyist\Data\HobbyListDbContext.csionally left Blank
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,7 +31,8 @@ namespace HobbyListForHobbyist.Data
                      PartNumber = "111",
                      Faction = "North Army",
                      PointCost = 100,
-                     BuildState = BuildState.built
+                     BuildState = BuildState.built,
+                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                  },
                  new MiniModel
                  {
@@ -41,7 +42,8 @@ namespace HobbyListForHobbyist.Data
                      PartNumber = "122",
                      Faction = "South Army",
                      PointCost = 75,
-                     BuildState = BuildState.painted
+                     BuildState = BuildState.painted,
+                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                  },
                   new MiniModel
                   {
@@ -51,7 +53,8 @@ namespace HobbyListForHobbyist.Data
                       PartNumber = "122",
                       Faction = "East Army",
                       PointCost = 250,
-                      BuildState = BuildState.unBuilt
+                      BuildState = BuildState.unBuilt,
+                      UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                   });
             modelBuilder.Entity<Paint>().HasData(
                 new Paint
@@ -59,21 +62,24 @@ namespace HobbyListForHobbyist.Data
                     Id = 1,
                     ColorName = "Gunmetal",
                     Manufacturer = "Forge Fire",
-                    ProductNumber = "32"
+                    ProductNumber = "32",
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                 },
                 new Paint
                 {
                     Id = 2,
                     ColorName = "Patriot Green",
                     Manufacturer = "Forge Fire",
-                    ProductNumber = "44"
+                    ProductNumber = "44",
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                 },
                 new Paint
                 {
                     Id = 3,
                     ColorName = "Alabaster",
                     Manufacturer = "Forge Fire",
-                    ProductNumber = "78"
+                    ProductNumber = "78",
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                 }
                 );
             modelBuilder.Entity<Supply>().HasData(
@@ -81,19 +87,60 @@ namespace HobbyListForHobbyist.Data
                 {
                     Id = 1,
                     Name = "Snipps",
-                    Category = "Cutting"
+                    Category = "Cutting",
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                 },
                 new Supply
                 {
                     Id = 2,
                     Name = "Plastiweld",
-                    Category = "Glue"
+                    Category = "Glue",
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                 }
+                );
+            modelBuilder.Entity<MiniWishList>().HasData(
+                new MiniWishList
+                {
+
+                    Id = 1,
+                    Name = "Chariot Personnel Carrier",
+                    Manufacturer = "Forge Fire",
+                    PartNumber = "200",
+                    Faction = "East Army",
+                    PointCost = 250,
+                    Price = 20.00m,
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                },
+                 new MiniWishList
+                 {
+
+                     Id = 2,
+                     Name = "Heavy support Squad",
+                     Manufacturer = "Forge Fire",
+                     PartNumber = "300",
+                     Faction = "West Army",
+                     PointCost = 250,
+                     Price = 35.00m,
+                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                 },
+                  new MiniWishList
+                  {
+
+                      Id = 3,
+                      Name = "Chariot Armed Personnel Carrier",
+                      Manufacturer = "Forge Fire",
+                      PartNumber = "30",
+                      Faction = "North Army",
+                      PointCost = 250,
+                      Price = 10m,
+                      UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                  }
                 );
 
         }
 
         public DbSet<MiniModel> MiniModels { get; set; }
+        public DbSet<MiniWishList> MiniWishLists { get; set; }
         public DbSet<MiniToPaint> MinisToPaint { get; set; }
         public DbSet<MiniToSupply> MinisToSupply { get; set; }
         public DbSet<Paint> Paints { get; set; }

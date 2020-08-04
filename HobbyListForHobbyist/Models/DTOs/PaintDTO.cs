@@ -7,7 +7,6 @@ namespace HobbyListForHobbyist.Models.DTOs
 {
     public class PaintDTO
     {
-        // ================== TODO ===========================
         public int Id { get; set; }
         public string ColorName { get; set; }
         public string Manufacturer { get; set; }

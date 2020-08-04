@@ -9,11 +9,13 @@ using HobbyListForHobbyist.Data;
 using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.Interfaces;
 using HobbyListForHobbyist.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PaintsController : ControllerBase
     {
         private readonly IPaint _paint;
@@ -24,18 +26,29 @@ namespace HobbyListForHobbyist.Controllers
             _paint = paint;
         }
 
+        // POST: api/Paints
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<Paint>> PostPaint(PaintDTO paintdto)
+        {
+
+            await _paint.Create(paintdto, GetUserId());
+            return CreatedAtAction("GetPaint", new { id = paintdto.Id }, paintdto);
+        }
+
         // GET: api/Paints
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PaintDTO>>> GetPaints()
         {
-            return await _paint.GetPaints();
+            return await _paint.GetPaints(GetUserId());
         }
 
         // GET: api/Paints/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PaintDTO>> GetPaint(int id)
         {
-            var paintdto = await _paint.GetPaint(id);
+            var paintdto = await _paint.GetPaint(id, GetUserId());
 
             if (paintdto == null)
             {
@@ -63,17 +76,6 @@ namespace HobbyListForHobbyist.Controllers
             return Ok(updatedPaintdto);
         }
 
-        // POST: api/Paints
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Paint>> PostPaint(PaintDTO paintdto)
-        {
-
-            await _paint.Create(paintdto);
-            return CreatedAtAction("GetPaint", new { id = paintdto.Id }, paintdto);
-        }
-
         // DELETE: api/Paints/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<PaintDTO>> DeletePaint(int id)
@@ -82,6 +84,9 @@ namespace HobbyListForHobbyist.Controllers
                 return NoContent();
         }
 
-       
+        protected string GetUserId()
+        {
+            return User.Claims.First(x => x.Type == "UserId").Value;
+        }
     }
 }

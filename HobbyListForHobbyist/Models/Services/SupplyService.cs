@@ -26,9 +26,9 @@ namespace HobbyListForHobbyist.Models.Services
             return supplyName;
         }
         // GetAllSupplies
-        public async Task<List<SupplyDTO>> GetSupplies()
+        public async Task<List<SupplyDTO>> GetSupplies(string userId)
         {
-            var supplies = await _context.Supplies.ToListAsync();
+            var supplies = await _context.Supplies.Where(x => x.UserId == userId).ToListAsync();
             var dtos = new List<SupplyDTO>();
             foreach (var item in supplies)
             {
@@ -43,8 +43,10 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetASupply
-        public async Task<SupplyDTO> GetSupply(int supplyId)
+        public async Task<SupplyDTO> GetSupply(int supplyId, string userId)
         {
+            Supply supplyName = await _context.Supplies.Where(x => x.UserId == userId)
+                                                            .FirstOrDefaultAsync(x => x.Id == supplyId);
             var supplyItem = await _context.Supplies.FindAsync(supplyId);
 
             SupplyDTO supply = new SupplyDTO()

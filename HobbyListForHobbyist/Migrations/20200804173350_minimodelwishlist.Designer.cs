@@ -4,14 +4,16 @@ using HobbyListForHobbyist.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HobbyListForHobbyist.Migrations
 {
     [DbContext(typeof(HobbyListDbContext))]
-    partial class HobbyListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200804173350_minimodelwishlist")]
+    partial class minimodelwishlist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,7 +168,12 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("PaintId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MiniWishListId")
+                        .HasColumnType("int");
+
                     b.HasKey("MiniModelId", "PaintId");
+
+                    b.HasIndex("MiniWishListId");
 
                     b.HasIndex("PaintId");
 
@@ -181,7 +188,12 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("SupplyId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MiniWishListId")
+                        .HasColumnType("int");
+
                     b.HasKey("MiniModelId", "SupplyId");
+
+                    b.HasIndex("MiniWishListId");
 
                     b.HasIndex("SupplyId");
 
@@ -201,9 +213,6 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<string>("Manufacturer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MiniModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -213,15 +222,10 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("PointCost")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MiniModelId");
 
                     b.ToTable("MiniWishLists");
 
@@ -234,7 +238,6 @@ namespace HobbyListForHobbyist.Migrations
                             Name = "Chariot Personnel Carrier",
                             PartNumber = "200",
                             PointCost = 250,
-                            Price = 20.00m,
                             UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
@@ -245,7 +248,6 @@ namespace HobbyListForHobbyist.Migrations
                             Name = "Heavy support Squad",
                             PartNumber = "300",
                             PointCost = 250,
-                            Price = 35.00m,
                             UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
@@ -256,7 +258,6 @@ namespace HobbyListForHobbyist.Migrations
                             Name = "Chariot Armed Personnel Carrier",
                             PartNumber = "30",
                             PointCost = 250,
-                            Price = 10m,
                             UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         });
                 });
@@ -487,6 +488,10 @@ namespace HobbyListForHobbyist.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HobbyListForHobbyist.Models.MiniWishList", null)
+                        .WithMany("MinisToPaints")
+                        .HasForeignKey("MiniWishListId");
+
                     b.HasOne("HobbyListForHobbyist.Models.Paint", "Paint")
                         .WithMany("MinisToPaint")
                         .HasForeignKey("PaintId")
@@ -502,18 +507,15 @@ namespace HobbyListForHobbyist.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HobbyListForHobbyist.Models.MiniWishList", null)
+                        .WithMany("MinisToSupplies")
+                        .HasForeignKey("MiniWishListId");
+
                     b.HasOne("HobbyListForHobbyist.Models.Supply", "Supply")
                         .WithMany("MiniToSupply")
                         .HasForeignKey("SupplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HobbyListForHobbyist.Models.MiniWishList", b =>
-                {
-                    b.HasOne("HobbyListForHobbyist.Models.MiniModel", "MiniModel")
-                        .WithMany()
-                        .HasForeignKey("MiniModelId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
