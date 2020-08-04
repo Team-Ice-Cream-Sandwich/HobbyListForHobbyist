@@ -127,6 +127,7 @@ UserId | string
 ---
 
 ## Change Log
+- 0.80 User Id Added
 - 0.70 Supply, Paint and MiniModel controllers finished
 - 0.60 Interfaces and Services
 - 0.50 DTOs complete

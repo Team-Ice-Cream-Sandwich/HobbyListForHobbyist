@@ -33,18 +33,15 @@ namespace HobbyListForHobbyist
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // ========================= TODO Install Newtonsoft into project then uncomment ======================
             services.AddControllers(/*Add filter after testing*/).AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
-            // =============================  TODO Uncomment when DbContext is built
             services.AddDbContext<HobbyListDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            // ============================== TODO Install and use Identity ==================================
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<HobbyListDbContext>()
                     .AddDefaultTokenProviders();
@@ -70,7 +67,6 @@ namespace HobbyListForHobbyist
                 };
             });
 
-            // ======================== TODO Change the name of the roles ============================
             //// add my policies
             services.AddAuthorization(options =>
             {
@@ -97,10 +93,8 @@ namespace HobbyListForHobbyist
             app.UseAuthorization();
 
 
-            // ====================== TODO Build out ApplicationUser Class ======================
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            // ====================== TODO Build out RoleInitializer Class ======================
             RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
 
             app.UseEndpoints(endpoints =>

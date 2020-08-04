@@ -17,7 +17,7 @@ namespace HobbyListForHobbyist.Controllers
     [ApiController]
     public class MiniModelsController : ControllerBase
     {
-        private IMiniModel _miniModel;
+        private IMiniModel _miniModel; 
 
         public MiniModelsController(IMiniModel miniModel)
         {
@@ -30,7 +30,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpPost]
         public async Task<ActionResult<MiniModelDTO>> PostMiniModel(MiniModelDTO miniModel)
         {
-            await _miniModel.Create(miniModel);            
+            await _miniModel.Create(miniModel, GetUserId());            
 
             return CreatedAtAction("GetMiniModel", new { id = miniModel.Id }, miniModel);
         }
@@ -39,7 +39,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MiniModelDTO>>> GetMiniModels()
         {
-            List<MiniModelDTO> miniModels = await _miniModel.GetAllMiniModels();
+            List<MiniModelDTO> miniModels = await _miniModel.GetAllMiniModels(GetUserId());
 
             return miniModels;
         }
@@ -48,7 +48,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("BuildState/{buildState}")]
         public async Task<ActionResult<IEnumerable<MiniModelDTO>>> GetMiniModelsOfState(BuildState buildState)
         {
-            var miniModels = await _miniModel.GetAMiniModelOfState(buildState);
+            var miniModels = await _miniModel.GetAMiniModelOfState(buildState, GetUserId());
 
             return miniModels;
         }
@@ -57,7 +57,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MiniModelDTO>> GetMiniModel(int id)
         {
-            MiniModelDTO miniModel = await _miniModel.GetMiniModel(id);
+            MiniModelDTO miniModel = await _miniModel.GetMiniModel(id, GetUserId());
 
             return miniModel;
         }
@@ -120,5 +120,9 @@ namespace HobbyListForHobbyist.Controllers
             return Ok();
         }
 
+        protected string GetUserId()
+        {
+            return User.Claims.First(x => x.Type == "UserId").Value;
+        }
     }
 }
