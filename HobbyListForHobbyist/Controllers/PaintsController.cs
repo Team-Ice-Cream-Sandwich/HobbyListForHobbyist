@@ -9,11 +9,13 @@ using HobbyListForHobbyist.Data;
 using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.Interfaces;
 using HobbyListForHobbyist.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PaintsController : ControllerBase
     {
         private readonly IPaint _paint;

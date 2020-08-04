@@ -9,11 +9,13 @@ using HobbyListForHobbyist.Data;
 using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.DTOs;
 using HobbyListForHobbyist.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SuppliesController : ControllerBase
     {
         private ISupply _supply;

@@ -10,11 +10,13 @@ using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.DTOs;
 using HobbyListForHobbyist.Models.Interfaces;
 using System.Data.Odbc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MiniModelsController : ControllerBase
     {
         private IMiniModel _miniModel; 
