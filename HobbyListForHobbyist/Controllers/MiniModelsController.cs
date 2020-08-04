@@ -42,7 +42,7 @@ namespace HobbyListForHobbyist.Controllers
         public async Task<ActionResult<IEnumerable<MiniModelDTO>>> GetMiniModels()
         {
             List<MiniModelDTO> miniModels = await _miniModel.GetAllMiniModels(GetUserId());
-
+            
             return miniModels;
         }
 
