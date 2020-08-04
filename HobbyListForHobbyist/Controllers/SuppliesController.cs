@@ -74,7 +74,7 @@ namespace HobbyListForHobbyist.Controllers
         protected string GetUserId()
         {
             return User.Claims.First(x => x.Type == "UserId").Value;
-        }
+        }       
 
     }
 }
