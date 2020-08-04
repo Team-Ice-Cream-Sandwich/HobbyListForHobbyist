@@ -13,6 +13,5 @@ namespace HobbyListForHobbyist.Models.DTOs
         public string Manufacturer { get; set; }
         public string ProductNumber { get; set; }
 
-        public List<MiniToPaint> MiniToPaints { get; set; }
     }
 }
