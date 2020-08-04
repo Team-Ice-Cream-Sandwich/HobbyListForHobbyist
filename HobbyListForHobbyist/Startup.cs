@@ -75,6 +75,7 @@ namespace HobbyListForHobbyist
             });
 
             services.AddTransient<IMiniModel, MiniModelService>();
+            services.AddTransient<IMiniWishList, MiniWishListService>();
             services.AddTransient<IPaint, PaintService>();
             services.AddTransient<ISupply, SupplyService>();         
         }

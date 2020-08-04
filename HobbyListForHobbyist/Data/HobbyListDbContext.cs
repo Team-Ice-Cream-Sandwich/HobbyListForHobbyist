@@ -12,7 +12,7 @@ namespace HobbyListForHobbyist.Data
     {
         public HobbyListDbContext(DbContextOptions<HobbyListDbContext> options) : base(options)
         {
-            // Intentionally left Blank
+            // IntentC:\Users\yasmo\Source\Repos\HobbyListForHobbyist\HobbyListForHobbyist\Data\HobbyListDbContext.csionally left Blank
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -98,10 +98,49 @@ namespace HobbyListForHobbyist.Data
                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                 }
                 );
+            modelBuilder.Entity<MiniWishList>().HasData(
+                new MiniWishList
+                {
+
+                    Id = 1,
+                    Name = "Chariot Personnel Carrier",
+                    Manufacturer = "Forge Fire",
+                    PartNumber = "200",
+                    Faction = "East Army",
+                    PointCost = 250,
+                    Price = 20.00m,
+                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                },
+                 new MiniWishList
+                 {
+
+                     Id = 2,
+                     Name = "Heavy support Squad",
+                     Manufacturer = "Forge Fire",
+                     PartNumber = "300",
+                     Faction = "West Army",
+                     PointCost = 250,
+                     Price = 35.00m,
+                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                 },
+                  new MiniWishList
+                  {
+
+                      Id = 3,
+                      Name = "Chariot Armed Personnel Carrier",
+                      Manufacturer = "Forge Fire",
+                      PartNumber = "30",
+                      Faction = "North Army",
+                      PointCost = 250,
+                      Price = 10m,
+                      UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                  }
+                );
 
         }
 
         public DbSet<MiniModel> MiniModels { get; set; }
+        public DbSet<MiniWishList> MiniWishLists { get; set; }
         public DbSet<MiniToPaint> MinisToPaint { get; set; }
         public DbSet<MiniToSupply> MinisToSupply { get; set; }
         public DbSet<Paint> Paints { get; set; }
