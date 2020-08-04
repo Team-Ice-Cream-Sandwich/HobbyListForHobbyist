@@ -17,14 +17,16 @@ namespace HobbyListForHobbyist.Models.Services
         {
             _context = context;
         }
+
         // CreateAPaint
-        public async Task<PaintDTO> Create(PaintDTO paintdto)
+        public async Task<PaintDTO> Create(PaintDTO paintdto, string userId)
         {
             Paint paint = new Paint()
             {
                 ColorName = paintdto.ColorName,
                 ProductNumber = paintdto.ProductNumber,
-                Manufacturer = paintdto.Manufacturer
+                Manufacturer = paintdto.Manufacturer,
+                UserId = userId
             };
                 
             _context.Entry(paint).State = EntityState.Added;
@@ -33,9 +35,10 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAPaint
-        public async Task<PaintDTO> GetPaint(int id)
+        public async Task<PaintDTO> GetPaint(int id, string userId)
         {
-          Paint paint = await  _context.Paints.FindAsync(id);
+            Paint paint = await _context.Paints.Where(x => x.UserId == userId)
+                                               .FirstOrDefaultAsync(x => x.Id == id);
 
             PaintDTO paintdto = new PaintDTO()
             {
@@ -48,22 +51,23 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAllPaints
-        public async Task<List<PaintDTO>> GetPaints()
+        public async Task<List<PaintDTO>> GetPaints(string userId)
         {
-            var paint = await _context.Paints.ToListAsync();
+            var paint = await _context.Paints.Where(x => x.UserId == userId)
+                                             .ToListAsync();
 
             var paintdto = new List<PaintDTO>();
 
             foreach (var item in paint)
             {
-                paintdto.Add(await GetPaint(item.Id));
+                paintdto.Add(await GetPaint(item.Id, userId));
             }
 
             return paintdto;
         }
 
         // UpdateAPaint
-        public async Task<PaintDTO> Update( PaintDTO paintdto)
+        public async Task<PaintDTO> Update(PaintDTO paintdto)
         {
             Paint paint = new Paint()
             {
