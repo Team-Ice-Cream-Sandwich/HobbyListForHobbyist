@@ -8,7 +8,6 @@ namespace HobbyListForHobbyist.Models.Interfaces
 {
     public interface IPaint
     {
-        // ================== TODO ===========================
            // CreateAPaint
         Task<PaintDTO> Create(PaintDTO paintdto);
         // GetAllPaints

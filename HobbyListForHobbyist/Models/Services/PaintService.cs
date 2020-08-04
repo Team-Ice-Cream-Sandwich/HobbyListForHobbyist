@@ -11,14 +11,12 @@ namespace HobbyListForHobbyist.Models.Services
 {
     public class PaintService : IPaint
     {
-        // ================== TODO ===========================
       private  HobbyListDbContext _context;
 
         public PaintService(HobbyListDbContext context)
         {
             _context = context;
         }
-        // ================== TODO ===========================
         // CreateAPaint
         public async Task<PaintDTO> Create(PaintDTO paintdto)
         {
