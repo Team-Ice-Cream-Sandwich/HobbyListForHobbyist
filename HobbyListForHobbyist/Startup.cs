@@ -34,7 +34,7 @@ namespace HobbyListForHobbyist
         public void ConfigureServices(IServiceCollection services)
         {
             // ========================= TODO Install Newtonsoft into project then uncomment ======================
-            services.AddControllers().AddNewtonsoftJson(options =>
+            services.AddControllers(/*Add filter after testing*/).AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
@@ -74,8 +74,8 @@ namespace HobbyListForHobbyist
             //// add my policies
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("TopLevelPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin));
-                options.AddPolicy("GenericPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin, ApplicationRoles.User)); 
+                options.AddPolicy("AdminPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("UserPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin, ApplicationRoles.User)); 
             });
 
             services.AddTransient<IMiniModel, MiniModelService>();

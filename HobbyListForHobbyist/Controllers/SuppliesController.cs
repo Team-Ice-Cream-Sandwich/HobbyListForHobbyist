@@ -31,7 +31,7 @@ namespace HobbyListForHobbyist.Controllers
         }
 
         // GET: api/Supplies/5
-        [HttpGet("{id}")]
+        [HttpGet("{supplyId}")]
         public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId)
         {
             SupplyDTO supply = await _supply.GetSupply(supplyId);
@@ -41,7 +41,7 @@ namespace HobbyListForHobbyist.Controllers
         // PUT: api/Supplies/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpPut("{supplyId}")]
         public async Task<IActionResult> PutSupply(int supplyId, SupplyDTO supplyDTO)
         {
             if (supplyId != supplyDTO.Id)
@@ -54,7 +54,7 @@ namespace HobbyListForHobbyist.Controllers
 
         // POST: api/Supplies
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // more details, please see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<SupplyDTO>> PostSupply(SupplyDTO supply)
         {
@@ -63,7 +63,7 @@ namespace HobbyListForHobbyist.Controllers
         }
 
         // DELETE: api/Supplies/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{supplyId}")]
         public async Task<ActionResult<SupplyDTO>> DeleteSupply(int supplyId)
         {
             await _supply.Delete(supplyId);
