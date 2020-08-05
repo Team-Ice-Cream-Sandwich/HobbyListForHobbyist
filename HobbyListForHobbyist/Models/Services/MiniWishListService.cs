@@ -12,13 +12,22 @@ namespace HobbyListForHobbyist.Models.Services
     public class MiniWishListService : IMiniWishList
     {
         private HobbyListDbContext _context;
-       
-
+        /// <summary>
+        /// injects the db into the class
+        /// </summary>
+        /// <param name="context"> Database</param>
         public MiniWishListService(HobbyListDbContext context)
         {
             _context = context;
            
         }
+
+        /// <summary>
+        /// Creates a miniWishList and adds it to the db
+        /// </summary>
+        /// <param name="wishListDto"> dto object</param>
+        /// <param name="email"> user email</param>
+        /// <returns> a wishlistdto </returns>
         public async Task<MiniWishListDTO> Create(MiniWishListDTO wishListDto, string email)
         {
             MiniWishList wishList = new MiniWishList()
@@ -38,14 +47,19 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
 
-
+        /// <summary>
+        /// Gets a single miniModel in the wishlist
+        /// </summary>
+        /// <param name="id"> integer for id</param>
+        /// <param name="email">users email</param>
+        /// <returns> a single wishlistdto object <returns>
         public async Task<MiniWishListDTO> GetMiniModelInWishList(int id, string email)
         {
             MiniWishList wishList = await _context.MiniWishLists.Where(x => x.Email == email)
                                                    .FirstOrDefaultAsync(x => x.Id == id);
 
 
-            // ============ TODO: Needs Testing =============
+          
 
             MiniWishListDTO wishListDto = new MiniWishListDTO()
             {
@@ -62,6 +76,11 @@ namespace HobbyListForHobbyist.Models.Services
 
         }
 
+        /// <summary>
+        /// Gets all miniModels in the wishList
+        /// </summary>
+        /// <param name="email">users email</param>
+        /// <returns> all wishlist object</returns>
         public async Task<List<MiniWishListDTO>> GetAllMiniModelsInWishList(string email)
         {
             List<MiniWishList> wishList = await _context.MiniWishLists.Where(x => x.Email == email)
@@ -87,7 +106,13 @@ namespace HobbyListForHobbyist.Models.Services
             return wishListDto;
         }
 
-
+        /// <summary>
+        /// Updates wishlistdto and saves it to the db
+        /// </summary>
+        /// <param name="wishListDto">object</param>
+        /// <param name="id"> integer for id </param>
+        /// <param name="email"> users email </param>
+        /// <returns> wishlistdto object </returns>
         public async Task<MiniWishListDTO> Update(MiniWishListDTO wishListDto, int id, string email)
         {
             MiniWishList wishList = new MiniWishList()
@@ -109,6 +134,12 @@ namespace HobbyListForHobbyist.Models.Services
             return wishListDto;
         }
 
+        // DeleteAMiniModel
+        /// <summary>
+        /// Deletes a miniModel from wishlist and db
+        /// </summary>
+        /// <param name="id">integer for id</param>
+        /// <returns> task completion </returns>
         public async Task Delete(int id)
         {
             MiniWishList wishList = await _context.MiniWishLists.FindAsync(id);
@@ -116,6 +147,13 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// adds the mini from the wishlist to MiniModel
+        /// </summary>
+        /// <param name="email">user email</param>
+        /// <param name="id">integer for id</param>
+        /// <returns> task completion </returns>
         public async Task AddMiniWishListToMiniModel(string email,int id)
         {
           var wishList = await  _context.MiniWishLists.Where(x => x.Email == email)
