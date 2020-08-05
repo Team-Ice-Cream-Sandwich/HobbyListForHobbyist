@@ -27,16 +27,16 @@ namespace HobbyListForHobbyist.Controllers
 
         // GET: api/Supplies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply(string userId)
+        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply(string email)
         {
-            return await _supply.GetSupplies(userId);
+            return await _supply.GetSupplies(email);
         }
 
         // GET: api/Supplies/5
         [HttpGet("{supplyId}")]
-        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId, string userId)
+        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId, string email)
         {
-            SupplyDTO supply = await _supply.GetSupply(supplyId, userId);
+            SupplyDTO supply = await _supply.GetSupply(supplyId, email);
             return supply;
         }
 
@@ -71,7 +71,7 @@ namespace HobbyListForHobbyist.Controllers
             await _supply.Delete(supplyId);
             return NoContent();
         }
-        protected string GetUserId()
+        protected string GetUserEmail()
         {
             return User.Claims.First(x => x.Type == "Email").Value;
         }       
