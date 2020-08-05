@@ -11,14 +11,14 @@ namespace HobbyListForHobbyist.Models.Interfaces
         // CreateAMiniWishList
         Task<MiniWishListDTO> Create(MiniWishListDTO wishListDto, string email);
 
-        // GetAllMiniModels
+        // GetAMiniModel
         Task<MiniWishListDTO> GetMiniModelInWishList(int id, string email);
 
-        // GetAMiniModel
+        // GetAllMiniModels
         Task<List<MiniWishListDTO>> GetAllMiniModelsInWishList(string email);
 
         // UpdateAMiniModel
-        Task<MiniWishListDTO> Update(MiniWishListDTO wishListDto, int id);
+        Task<MiniWishListDTO> Update(MiniWishListDTO wishListDto, int id, string email);
         // DeleteAMiniModel
         Task Delete(int id);
 

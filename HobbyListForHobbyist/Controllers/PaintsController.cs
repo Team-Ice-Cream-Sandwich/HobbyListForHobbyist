@@ -74,7 +74,7 @@ namespace HobbyListForHobbyist.Controllers
                 return BadRequest();
             }
 
-            var updatedPaintdto = await _paint.Update(paintdto);
+            var updatedPaintdto = await _paint.Update(paintdto, GetUserEmail());
 
           
 
