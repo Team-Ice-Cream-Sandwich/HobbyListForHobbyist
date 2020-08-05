@@ -11,9 +11,9 @@ namespace HobbyListForHobbyist.Models.Interfaces
         //CreateAllSupplies
         Task<SupplyDTO> Create(SupplyDTO supplyName);
         // GetAllSupplies
-        Task<List<SupplyDTO>> GetSupplies(string userId);
+        Task<List<SupplyDTO>> GetSupplies(string email);
         // GetASupply
-        Task<SupplyDTO> GetSupply(int supplyId, string userId);
+        Task<SupplyDTO> GetSupply(int supplyId, string email);
         // UpdateASupply
         Task<SupplyDTO> Update(SupplyDTO supplyDTO);
         // DeleteASupply

@@ -51,11 +51,14 @@ button.accept-policy {
   line-height: inherit;
 }
 
+first-body-area {
+    font-size: 3rem;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
