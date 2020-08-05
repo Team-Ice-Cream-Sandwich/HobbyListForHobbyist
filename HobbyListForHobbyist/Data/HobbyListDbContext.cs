@@ -88,14 +88,14 @@ namespace HobbyListForHobbyist.Data
                     Id = 1,
                     Name = "Snipps",
                     Category = "Cutting",
-                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                    Email = "test11@gmail.com"
                 },
                 new Supply
                 {
                     Id = 2,
                     Name = "Plastiweld",
                     Category = "Glue",
-                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                    Email = "test11@gmail.com"
                 }
                 );
             modelBuilder.Entity<MiniWishList>().HasData(
