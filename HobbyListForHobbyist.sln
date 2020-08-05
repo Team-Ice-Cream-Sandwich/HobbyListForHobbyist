@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyListForHobbyist", "HobbyListForHobbyist\HobbyListForHobbyist.csproj", "{2D01E50E-9021-4E8F-863E-944E097419A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyListTests", "HobbyListTests\HobbyListTests.csproj", "{554A196D-5098-460B-B130-DCA02075FCF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2D01E50E-9021-4E8F-863E-944E097419A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D01E50E-9021-4E8F-863E-944E097419A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D01E50E-9021-4E8F-863E-944E097419A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554A196D-5098-460B-B130-DCA02075FCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554A196D-5098-460B-B130-DCA02075FCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554A196D-5098-460B-B130-DCA02075FCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554A196D-5098-460B-B130-DCA02075FCF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
