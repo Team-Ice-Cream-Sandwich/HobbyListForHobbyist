@@ -108,7 +108,7 @@ namespace HobbyListForHobbyist.Data
                     PartNumber = "200",
                     Faction = "East Army",
                     PointCost = 250,
-                    Price = 20.00m,
+                    Price = "20.00",
                     Email = "admin@gmail.com"
                 },
                  new MiniWishList
@@ -120,7 +120,7 @@ namespace HobbyListForHobbyist.Data
                      PartNumber = "300",
                      Faction = "West Army",
                      PointCost = 250,
-                     Price = 35.00m,
+                     Price = "35.00",
                      Email = "admin@gmail.com"
                  },
                   new MiniWishList
@@ -132,7 +132,7 @@ namespace HobbyListForHobbyist.Data
                       PartNumber = "30",
                       Faction = "North Army",
                       PointCost = 250,
-                      Price = 10m,
+                      Price = "10",
                       Email = "admin@gmail.com"
                   }
                 );

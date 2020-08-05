@@ -15,7 +15,7 @@ namespace HobbyListForHobbyist.Models.DTOs
         public string PartNumber { get; set; }
         public string Faction { get; set; }
         public int PointCost { get; set; }
-        public decimal Price { get; set; }
+        public string Price { get; set; }
         
     }
 }

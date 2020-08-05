@@ -4,14 +4,16 @@ using HobbyListForHobbyist.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HobbyListForHobbyist.Migrations
 {
     [DbContext(typeof(HobbyListDbContext))]
-    partial class HobbyListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200805165237_switchtoemail")]
+    partial class switchtoemail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,8 +218,8 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("PointCost")
                         .HasColumnType("int");
 
-                    b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -235,7 +237,7 @@ namespace HobbyListForHobbyist.Migrations
                             Name = "Chariot Personnel Carrier",
                             PartNumber = "200",
                             PointCost = 250,
-                            Price = "20.00"
+                            Price = 20.00m
                         },
                         new
                         {
@@ -246,7 +248,7 @@ namespace HobbyListForHobbyist.Migrations
                             Name = "Heavy support Squad",
                             PartNumber = "300",
                             PointCost = 250,
-                            Price = "35.00"
+                            Price = 35.00m
                         },
                         new
                         {
@@ -257,7 +259,7 @@ namespace HobbyListForHobbyist.Migrations
                             Name = "Chariot Armed Personnel Carrier",
                             PartNumber = "30",
                             PointCost = 250,
-                            Price = "10"
+                            Price = 10m
                         });
                 });
 
