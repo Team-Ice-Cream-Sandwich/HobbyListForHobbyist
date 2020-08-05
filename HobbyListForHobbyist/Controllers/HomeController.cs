@@ -22,9 +22,9 @@ namespace HobbyListForHobbyist.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {            
-            return RedirectToAction("GetMiniModels", "MiniModels");
+            //return RedirectToAction("GetMiniModels", "MiniModels");
             //return RedirectToRoute(new { controller = "api/MiniModels" });
-            //return View();
+            return View();
         }
 
         public IActionResult Privacy()

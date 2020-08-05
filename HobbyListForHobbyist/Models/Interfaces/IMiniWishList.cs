@@ -9,13 +9,13 @@ namespace HobbyListForHobbyist.Models.Interfaces
     public interface IMiniWishList
     {
         // CreateAMiniWishList
-        Task<MiniWishListDTO> Create(MiniWishListDTO wishListDto, string userId);
+        Task<MiniWishListDTO> Create(MiniWishListDTO wishListDto, string email);
 
         // GetAllMiniModels
-        Task<MiniWishListDTO> GetMiniModelInWishList(int id, string userId);
+        Task<MiniWishListDTO> GetMiniModelInWishList(int id, string email);
 
         // GetAMiniModel
-        Task<List<MiniWishListDTO>> GetAllMiniModelsInWishList(string userId);
+        Task<List<MiniWishListDTO>> GetAllMiniModelsInWishList(string email);
 
         // UpdateAMiniModel
         Task<MiniWishListDTO> Update(MiniWishListDTO wishListDto, int id);
@@ -23,7 +23,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         Task Delete(int id);
 
         // add wishlist to model
-        Task AddMiniWishListToMiniModel(string userId, int id);
+        Task AddMiniWishListToMiniModel(string email, int id);
 
     }
 }

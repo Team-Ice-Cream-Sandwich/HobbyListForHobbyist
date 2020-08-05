@@ -4,14 +4,16 @@ using HobbyListForHobbyist.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HobbyListForHobbyist.Migrations
 {
     [DbContext(typeof(HobbyListDbContext))]
-    partial class HobbyListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200805010449_endofday2migration")]
+    partial class endofday2migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,9 +102,6 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("BuildState")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Faction")
                         .HasColumnType("nvarchar(max)");
 
@@ -118,6 +117,9 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("PointCost")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("MiniModels");
@@ -127,34 +129,34 @@ namespace HobbyListForHobbyist.Migrations
                         {
                             Id = 1,
                             BuildState = 1,
-                            Email = "admin@gmail.com",
                             Faction = "North Army",
                             Manufacturer = "Forge Fire",
                             Name = "Platoon Leader",
                             PartNumber = "111",
-                            PointCost = 100
+                            PointCost = 100,
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 2,
                             BuildState = 2,
-                            Email = "admin@gmail.com",
                             Faction = "South Army",
                             Manufacturer = "Forge Fire",
                             Name = "Heavy Support Squad",
                             PartNumber = "122",
-                            PointCost = 75
+                            PointCost = 75,
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 3,
                             BuildState = 0,
-                            Email = "admin@gmail.com",
                             Faction = "East Army",
                             Manufacturer = "Forge Fire",
                             Name = "Chariot Armored Personnel Carrier",
                             PartNumber = "122",
-                            PointCost = 250
+                            PointCost = 250,
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         });
                 });
 
@@ -195,9 +197,6 @@ namespace HobbyListForHobbyist.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Faction")
                         .HasColumnType("nvarchar(max)");
 
@@ -216,7 +215,10 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<int>("PointCost")
                         .HasColumnType("int");
 
-                    b.Property<string>("Price")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -229,35 +231,35 @@ namespace HobbyListForHobbyist.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "admin@gmail.com",
                             Faction = "East Army",
                             Manufacturer = "Forge Fire",
                             Name = "Chariot Personnel Carrier",
                             PartNumber = "200",
                             PointCost = 250,
-                            Price = "20.00"
+                            Price = 20.00m,
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 2,
-                            Email = "admin@gmail.com",
                             Faction = "West Army",
                             Manufacturer = "Forge Fire",
                             Name = "Heavy support Squad",
                             PartNumber = "300",
                             PointCost = 250,
-                            Price = "35.00"
+                            Price = 35.00m,
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 3,
-                            Email = "admin@gmail.com",
                             Faction = "North Army",
                             Manufacturer = "Forge Fire",
                             Name = "Chariot Armed Personnel Carrier",
                             PartNumber = "30",
                             PointCost = 250,
-                            Price = "10"
+                            Price = 10m,
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         });
                 });
 
@@ -271,13 +273,13 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<string>("ColorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Manufacturer")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -289,25 +291,25 @@ namespace HobbyListForHobbyist.Migrations
                         {
                             Id = 1,
                             ColorName = "Gunmetal",
-                            Email = "admin@gmail.com",
                             Manufacturer = "Forge Fire",
-                            ProductNumber = "32"
+                            ProductNumber = "32",
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 2,
                             ColorName = "Patriot Green",
-                            Email = "admin@gmail.com",
                             Manufacturer = "Forge Fire",
-                            ProductNumber = "44"
+                            ProductNumber = "44",
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 3,
                             ColorName = "Alabaster",
-                            Email = "admin@gmail.com",
                             Manufacturer = "Forge Fire",
-                            ProductNumber = "78"
+                            ProductNumber = "78",
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         });
                 });
 
@@ -321,10 +323,10 @@ namespace HobbyListForHobbyist.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -336,15 +338,15 @@ namespace HobbyListForHobbyist.Migrations
                         {
                             Id = 1,
                             Category = "Cutting",
-                            Email = "admin@gmail.com",
-                            Name = "Snipps"
+                            Name = "Snipps",
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         },
                         new
                         {
                             Id = 2,
                             Category = "Glue",
-                            Email = "admin@gmail.com",
-                            Name = "Plastiweld"
+                            Name = "Plastiweld",
+                            UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
                         });
                 });
 

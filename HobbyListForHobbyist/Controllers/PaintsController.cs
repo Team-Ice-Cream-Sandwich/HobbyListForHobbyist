@@ -36,7 +36,7 @@ namespace HobbyListForHobbyist.Controllers
         public async Task<ActionResult<Paint>> PostPaint(PaintDTO paintdto)
         {
 
-            await _paint.Create(paintdto, GetUserId());
+            await _paint.Create(paintdto, GetUserEmail());
             return CreatedAtAction("GetPaint", new { id = paintdto.Id }, paintdto);
         }
 
@@ -44,7 +44,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PaintDTO>>> GetPaints()
         {
-            return await _paint.GetPaints(GetUserId());
+            return await _paint.GetPaints(GetUserEmail());
         }
 
         // GET: api/Paints/5
@@ -53,7 +53,7 @@ namespace HobbyListForHobbyist.Controllers
         {
           
             
-                var paintdto = await _paint.GetPaint(id, GetUserId());
+                var paintdto = await _paint.GetPaint(id, GetUserEmail());
 
             if (paintdto == null)
             {
@@ -92,6 +92,10 @@ namespace HobbyListForHobbyist.Controllers
         protected string GetUserId()
         {
             return User.Claims.First(x => x.Type == "UserId").Value;
+        }
+        protected string GetUserEmail()
+        {
+            return User.Claims.First(x => x.Type == "Email").Value;
         }
     }
 }

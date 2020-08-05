@@ -8,6 +8,7 @@ using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.Interfaces;
 using HobbyListForHobbyist.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace HobbyListForHobbyist
 {
@@ -62,6 +65,24 @@ namespace HobbyListForHobbyist
                     .AddEntityFrameworkStores<HobbyListDbContext>()
                     .AddDefaultTokenProviders();
 
+            // =============== SWAGGER ==========================
+            //services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HobbyList", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                });
+
+                c.OperationFilter<AuthenticationRequirementOperationFilter>();
+            });
+            // ==================================================
+
             services.AddAuthentication(options =>
             {
                 // Must define the JWT Bearer defaults
@@ -87,18 +108,19 @@ namespace HobbyListForHobbyist
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin));
-                options.AddPolicy("UserPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin, ApplicationRoles.User)); 
+                options.AddPolicy("UserPrivileges", policy => policy.RequireRole(ApplicationRoles.Admin, ApplicationRoles.User));
             });
 
             services.AddTransient<IMiniModel, MiniModelService>();
             services.AddTransient<IMiniWishList, MiniWishListService>();
             services.AddTransient<IPaint, PaintService>();
-            services.AddTransient<ISupply, SupplyService>();         
+            services.AddTransient<ISupply, SupplyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -113,8 +135,21 @@ namespace HobbyListForHobbyist
 
 
             app.UseHttpsRedirection();
+
+
+
             app.UseStaticFiles();
             // ========================================
+
+            // =================== SWAGGER ====================
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HobbyList V1");
+
+            });
+            // ==================================================
             app.UseRouting();
 
             app.UseAuthentication();
@@ -129,6 +164,32 @@ namespace HobbyListForHobbyist
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+
+        private class AuthenticationRequirementOperationFilter : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                var hasAnonymous = context.ApiDescription.CustomAttributes().OfType<AllowAnonymousAttribute>().Any();
+                if (hasAnonymous)
+                    return;
+
+                operation.Security ??= new List<OpenApiSecurityRequirement>();
+
+                var scheme = new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme,
+                    },
+                };
+                operation.Security.Add(new OpenApiSecurityRequirement
+                {
+                    [scheme] = new List<string>()
+                });
+            }
         }
     }
 }

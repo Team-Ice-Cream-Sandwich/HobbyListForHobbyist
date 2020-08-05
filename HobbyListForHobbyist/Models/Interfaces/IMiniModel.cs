@@ -9,13 +9,13 @@ namespace HobbyListForHobbyist.Models.Interfaces
     public interface IMiniModel
     {
         // CreateAMiniModel
-        Task<MiniModelDTO> Create(MiniModelDTO miniModel, string userId);
+        Task<MiniModelDTO> Create(MiniModelDTO miniModel, string email);
         // GetAllMiniModels
-        Task<MiniModelDTO> GetMiniModel(int id, string userId);
+        Task<MiniModelDTO> GetMiniModel(int id, string email);
         // GetAllMiniModelsOfState
-        Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState, string userId);
+        Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState, string email);
         // GetAMiniModel
-        Task<List<MiniModelDTO>> GetAllMiniModels(string userId);
+        Task<List<MiniModelDTO>> GetAllMiniModels(string email);
         // UpdateAMiniModel
         Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id);
         // DeleteAMiniModel
