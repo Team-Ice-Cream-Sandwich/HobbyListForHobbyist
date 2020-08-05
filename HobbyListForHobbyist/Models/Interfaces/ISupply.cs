@@ -15,7 +15,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         // GetASupply
         Task<SupplyDTO> GetSupply(int supplyId, string email);
         // UpdateASupply
-        Task<SupplyDTO> Update(SupplyDTO supplyDTO);
+        Task<SupplyDTO> Update(SupplyDTO supplyDTO, string email);
         // DeleteASupply
         Task Delete(int supplyId);
     }
