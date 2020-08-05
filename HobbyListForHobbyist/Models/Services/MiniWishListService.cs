@@ -88,7 +88,7 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
 
-        public async Task<MiniWishListDTO> Update(MiniWishListDTO wishListDto, int id)
+        public async Task<MiniWishListDTO> Update(MiniWishListDTO wishListDto, int id, string email)
         {
             MiniWishList wishList = new MiniWishList()
             {
@@ -96,8 +96,11 @@ namespace HobbyListForHobbyist.Models.Services
                 Name = wishListDto.Name,
                 Manufacturer = wishListDto.Manufacturer,
                 Faction = wishListDto.Faction,
+                PartNumber = wishListDto.PartNumber,
                 PointCost = wishListDto.PointCost,
-                Price = wishListDto.Price
+                Price = wishListDto.Price,
+                Email = email
+                 
             };
 
             _context.Entry(wishList).State = EntityState.Modified;

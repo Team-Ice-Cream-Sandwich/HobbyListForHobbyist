@@ -67,14 +67,15 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // UpdateAPaint
-        public async Task<PaintDTO> Update(PaintDTO paintdto)
+        public async Task<PaintDTO> Update(PaintDTO paintdto , string email)
         {
             Paint paint = new Paint()
             {
                 Id = paintdto.Id,
                 ColorName = paintdto.ColorName,
                 ProductNumber = paintdto.ProductNumber,
-                Manufacturer = paintdto.Manufacturer
+                Manufacturer = paintdto.Manufacturer,
+                Email = email
             };
             _context.Entry(paint).State = EntityState.Modified;
             await _context.SaveChangesAsync();

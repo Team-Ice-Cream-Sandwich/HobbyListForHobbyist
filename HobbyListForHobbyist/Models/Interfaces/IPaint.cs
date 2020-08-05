@@ -15,7 +15,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         // GetAPaint
         Task<PaintDTO> GetPaint(int id, string email);
         // UpdateAPaint
-        Task<PaintDTO> Update(PaintDTO paintdto);
+        Task<PaintDTO> Update(PaintDTO paintdto, string email);
         // DeleteAPaint
         Task Delete(int id);
     }
