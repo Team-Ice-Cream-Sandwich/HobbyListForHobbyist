@@ -63,7 +63,7 @@ namespace HobbyListForHobbyist.Models.Services
                                                            .Include(x=>x.Supply)
                                                            .ToListAsync();
 
-            // ============ TODO: Needs Testing =============
+            // ============ TODO: Needs Testing/FIXING =============
             List<PaintDTO> paints = new List<PaintDTO>();
             List<SupplyDTO> supplies = new List<SupplyDTO>();
             foreach (var item in paintList)

@@ -71,7 +71,18 @@ namespace HobbyListForHobbyist.Models.Services
 
             foreach (var item in wishList)
             {
-                wishListDto.Add(await GetMiniModelInWishList(item.Id, item.UserId));
+                //wishListDto.Add(await GetMiniModelInWishList(item.Id, item.UserId));
+                wishListDto.Add(new MiniWishListDTO
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Manufacturer = item.Manufacturer,
+                    PartNumber = item.PartNumber,
+                    Faction = item.Faction,
+                    PointCost = item.PointCost,
+                    Price = item.Price
+                     
+                });
             }
             return wishListDto;
         }
@@ -102,20 +113,23 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddMiniWishListToMiniModel(string userId, MiniWishListDTO wishListDto)
+        public async Task AddMiniWishListToMiniModel(string userId,int id)
         {
+          var wishList = await  _context.MiniWishLists.Where(x => x.UserId == userId)
+                                        .FirstOrDefaultAsync(x => x.Id == id);
             MiniModel miniModel = new MiniModel()
             {
-                Name = wishListDto.Name,
-                Manufacturer = wishListDto.Manufacturer,
-                PartNumber = wishListDto.PartNumber,
-                Faction = wishListDto.Faction,
-                PointCost = wishListDto.PointCost,
+                Name = wishList.Name,
+                Manufacturer = wishList.Manufacturer,
+                PartNumber = wishList.PartNumber,
+                Faction = wishList.Faction,
+                PointCost = wishList.PointCost,
                 BuildState = BuildState.unBuilt,
                 UserId = userId
             };
 
             _context.Entry(miniModel).State = EntityState.Added;
+            _context.Entry(wishList).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
 
         }
