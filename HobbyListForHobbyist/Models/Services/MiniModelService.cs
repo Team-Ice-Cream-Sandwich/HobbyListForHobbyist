@@ -26,6 +26,11 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // CreateAMiniModel
+        /// <summary>
+        /// The below method allows one to create an minimodel to be stored within MiniModel
+        /// </summary>
+        /// <param name="supplyName">the name of the minimodel item</param>
+        /// <returns>the newly added minimodel item</returns>
         public async Task<MiniModelDTO> Create(MiniModelDTO miniModel, string email)
         {
             //========================= TODO Test user ID =========================
@@ -50,6 +55,11 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAMiniModel
+        /// <summary>
+        /// the below method allows one to seach for a particular minimodel item
+        /// </summary>
+        /// <param name="email">this is the email associated with the current user (ensures they have access to minimodel item)</param>
+        /// <returns>the minimodel item in question</returns>
         public async Task<MiniModelDTO> GetMiniModel(int id, string email)
         {
             MiniModel miniModel = await _context.MiniModels.Where(x=>x.Email == email)
@@ -140,6 +150,12 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAllMiniModels
+        /// <summary>
+        /// the below method brings up to the user all minimodels items currently in their table
+        /// </summary>
+        /// <param name="supplyId">the id number of each particular minimodel item (the method checks for them all)</param>
+        /// <param name="email">authenticates the user's access level for the minimodel items</param>
+        /// <returns>the minimodels items in the database</returns>
         public async Task<List<MiniModelDTO>> GetAllMiniModels(string email)
         {
             List<MiniModel> miniList = await _context.MiniModels.Where(x=>x.Email==email)
@@ -187,6 +203,14 @@ namespace HobbyListForHobbyist.Models.Services
             return miniDTOList;
         }
         // UpdateAMiniModel
+        /// <summary>
+        /// the below method updates a particular minimodel item in the database
+        /// </summary>
+        /// <param name="supplyDTO">this selects the minimodel DTO (what parameters are shown to user)</param>
+        /// <param name="email">checks to see if user has authorization for selected minimodel item</param>
+        /// <returns>the minimodel dto with the updated minimodel item</returns>
+
+
         public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email)
         {
             Enum.TryParse(miniModel.BuildState, out BuildState buildState);
@@ -209,6 +233,11 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // DeleteAMiniModel
+        /// <summary>
+        /// the below method deletes a minimodel item from the database
+        /// </summary>
+        /// <param name="supplyId">the minimodel item to be deleted</param>
+        /// <returns>nothing, the item is deleted</returns>
         public async Task Delete(int id)
         {
             MiniModel miniModel = await _context.MiniModels.FindAsync(id);
