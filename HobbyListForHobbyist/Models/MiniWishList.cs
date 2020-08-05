@@ -15,7 +15,7 @@ namespace HobbyListForHobbyist.Models
         public string Faction { get; set; }
         public int PointCost { get; set; }
         public decimal Price { get; set; }
-        public string UserId { get; set; }
+        public string Email { get; set; }
 
         // Nav Properties
         public MiniModel MiniModel{ get; set; }

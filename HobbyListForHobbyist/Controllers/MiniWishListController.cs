@@ -31,7 +31,7 @@ namespace HobbyListForHobbyist.Controllers
         public async Task<ActionResult<MiniWishListDTO>> PostAllInMiniWishList(MiniWishListDTO wishListDto)
         {
 
-            await _wishList.Create(wishListDto, GetUserId());
+            await _wishList.Create(wishListDto, GetUserEmail());
             return CreatedAtAction("GetMiniModelInWishList", new { id = wishListDto.Id }, wishListDto);
         }
 
@@ -39,14 +39,14 @@ namespace HobbyListForHobbyist.Controllers
         [HttpPost ("{id}/miniModel")]
         public async Task<IActionResult> PostMiniWishListToMiniModel(int id)
         {
-            await _wishList.AddMiniWishListToMiniModel(GetUserId(), id);
+            await _wishList.AddMiniWishListToMiniModel(GetUserEmail(), id);
             return Ok();
         }
         // GET: api/MiniWishList 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MiniWishListDTO>>> GetAllInWishList()
         {
-           var  wishListDto =  await _wishList.GetAllMiniModelsInWishList(GetUserId());
+           var  wishListDto =  await _wishList.GetAllMiniModelsInWishList(GetUserEmail());
             return wishListDto;
         }
 
@@ -54,7 +54,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MiniWishListDTO>> GetMiniInWishList(int id)
         {
-            var wishListDto = await _wishList.GetMiniModelInWishList(id, GetUserId());
+            var wishListDto = await _wishList.GetMiniModelInWishList(id, GetUserEmail());
 
             if (wishListDto == null)
             {
@@ -95,5 +95,9 @@ namespace HobbyListForHobbyist.Controllers
             return User.Claims.First(x => x.Type == "UserId").Value;
         }
 
+        protected string GetUserEmail()
+        {
+            return User.Claims.First(x => x.Type == "Email").Value;
+        }
     }
 }

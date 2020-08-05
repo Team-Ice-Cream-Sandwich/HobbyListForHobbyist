@@ -9,11 +9,11 @@ namespace HobbyListForHobbyist.Models.Interfaces
     public interface IPaint
     {
            // CreateAPaint
-        Task<PaintDTO> Create(PaintDTO paintdto, string userId);
+        Task<PaintDTO> Create(PaintDTO paintdto, string email);
         // GetAllPaints
-        Task<List<PaintDTO>> GetPaints(string userId);
+        Task<List<PaintDTO>> GetPaints(string email);
         // GetAPaint
-        Task<PaintDTO> GetPaint(int id, string userId);
+        Task<PaintDTO> GetPaint(int id, string email);
         // UpdateAPaint
         Task<PaintDTO> Update(PaintDTO paintdto);
         // DeleteAPaint
