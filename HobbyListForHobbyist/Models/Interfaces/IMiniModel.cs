@@ -17,7 +17,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         // GetAMiniModel
         Task<List<MiniModelDTO>> GetAllMiniModels(string email);
         // UpdateAMiniModel
-        Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id);
+        Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email);
         // DeleteAMiniModel
         Task Delete(int id);
 

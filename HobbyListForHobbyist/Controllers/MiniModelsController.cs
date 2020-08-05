@@ -75,7 +75,7 @@ namespace HobbyListForHobbyist.Controllers
                 return BadRequest();
             }
 
-            var updatedMini = await _miniModel.Update(miniModel, id);
+            var updatedMini = await _miniModel.Update(miniModel, id, GetUserEmail());
 
             return Ok(updatedMini);
         }
