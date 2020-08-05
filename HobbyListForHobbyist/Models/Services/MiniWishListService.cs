@@ -19,7 +19,7 @@ namespace HobbyListForHobbyist.Models.Services
             _context = context;
            
         }
-        public async Task<MiniWishListDTO> Create(MiniWishListDTO wishListDto, string userId)
+        public async Task<MiniWishListDTO> Create(MiniWishListDTO wishListDto, string email)
         {
             MiniWishList wishList = new MiniWishList()
             {
@@ -29,7 +29,7 @@ namespace HobbyListForHobbyist.Models.Services
                 Faction = wishListDto.Faction,
                 PointCost = wishListDto.PointCost,
                 Price = wishListDto.Price,
-                UserId = userId
+                Email = email
             };
 
             _context.Entry(wishList).State = EntityState.Added;
@@ -39,9 +39,9 @@ namespace HobbyListForHobbyist.Models.Services
 
 
 
-        public async Task<MiniWishListDTO> GetMiniModelInWishList(int id, string userId)
+        public async Task<MiniWishListDTO> GetMiniModelInWishList(int id, string email)
         {
-            MiniWishList wishList = await _context.MiniWishLists.Where(x => x.UserId == userId)
+            MiniWishList wishList = await _context.MiniWishLists.Where(x => x.Email == email)
                                                    .FirstOrDefaultAsync(x => x.Id == id);
 
 
@@ -62,9 +62,9 @@ namespace HobbyListForHobbyist.Models.Services
 
         }
 
-        public async Task<List<MiniWishListDTO>> GetAllMiniModelsInWishList(string userId)
+        public async Task<List<MiniWishListDTO>> GetAllMiniModelsInWishList(string email)
         {
-            List<MiniWishList> wishList = await _context.MiniWishLists.Where(x => x.UserId == userId)
+            List<MiniWishList> wishList = await _context.MiniWishLists.Where(x => x.Email == email)
                                                                 .ToListAsync();
 
             List<MiniWishListDTO> wishListDto = new List<MiniWishListDTO>();
@@ -113,9 +113,9 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddMiniWishListToMiniModel(string userId,int id)
+        public async Task AddMiniWishListToMiniModel(string email,int id)
         {
-          var wishList = await  _context.MiniWishLists.Where(x => x.UserId == userId)
+          var wishList = await  _context.MiniWishLists.Where(x => x.Email == email)
                                         .FirstOrDefaultAsync(x => x.Id == id);
             MiniModel miniModel = new MiniModel()
             {
@@ -125,7 +125,7 @@ namespace HobbyListForHobbyist.Models.Services
                 Faction = wishList.Faction,
                 PointCost = wishList.PointCost,
                 BuildState = BuildState.unBuilt,
-                UserId = userId
+                Email = email
             };
 
             _context.Entry(miniModel).State = EntityState.Added;

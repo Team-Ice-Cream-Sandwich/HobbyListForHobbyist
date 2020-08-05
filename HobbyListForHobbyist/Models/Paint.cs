@@ -12,7 +12,7 @@ namespace HobbyListForHobbyist.Models
         public string ColorName { get; set; }
         public string Manufacturer { get; set; }
         public string ProductNumber { get; set; }
-        public string UserId { get; set; }
+        public string Email { get; set; }
 
         // Nav Properties
         public List<MiniToPaint> MinisToPaint { get; set; }
