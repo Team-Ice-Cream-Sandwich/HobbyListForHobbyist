@@ -187,7 +187,7 @@ namespace HobbyListForHobbyist.Models.Services
             return miniDTOList;
         }
         // UpdateAMiniModel
-        public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id)
+        public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email)
         {
             Enum.TryParse(miniModel.BuildState, out BuildState buildState);
 
@@ -198,7 +198,8 @@ namespace HobbyListForHobbyist.Models.Services
                 Manufacturer = miniModel.Manufacturer,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                BuildState = buildState
+                BuildState = buildState,
+                Email = email
             };
 
             _context.Entry(updatedMiniModel).State = EntityState.Modified;
