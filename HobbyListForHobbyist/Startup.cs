@@ -62,6 +62,10 @@ namespace HobbyListForHobbyist
                     .AddEntityFrameworkStores<HobbyListDbContext>()
                     .AddDefaultTokenProviders();
 
+            // =============== SWAGGER ==========================
+            services.AddSwaggerGen();
+            // ==================================================
+
             services.AddAuthentication(options =>
             {
                 // Must define the JWT Bearer defaults
@@ -99,6 +103,7 @@ namespace HobbyListForHobbyist
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -115,6 +120,14 @@ namespace HobbyListForHobbyist
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             // ========================================
+
+            // =================== SWAGGER ====================
+            app.UseSwagger();
+            app.UseSwaggerUI(c => 
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HobbyList V1");
+            });
+            // ==================================================
             app.UseRouting();
 
             app.UseAuthentication();
