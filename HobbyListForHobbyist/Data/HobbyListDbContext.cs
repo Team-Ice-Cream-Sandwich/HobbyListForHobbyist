@@ -32,7 +32,7 @@ namespace HobbyListForHobbyist.Data
                      Faction = "North Army",
                      PointCost = 100,
                      BuildState = BuildState.built,
-                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                     Email = "admin@gmail.com"
                  },
                  new MiniModel
                  {
@@ -43,7 +43,7 @@ namespace HobbyListForHobbyist.Data
                      Faction = "South Army",
                      PointCost = 75,
                      BuildState = BuildState.painted,
-                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                     Email = "admin@gmail.com"
                  },
                   new MiniModel
                   {
@@ -54,7 +54,7 @@ namespace HobbyListForHobbyist.Data
                       Faction = "East Army",
                       PointCost = 250,
                       BuildState = BuildState.unBuilt,
-                      UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                      Email = "admin@gmail.com"
                   });
             modelBuilder.Entity<Paint>().HasData(
                 new Paint
@@ -63,7 +63,7 @@ namespace HobbyListForHobbyist.Data
                     ColorName = "Gunmetal",
                     Manufacturer = "Forge Fire",
                     ProductNumber = "32",
-                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                    Email = "admin@gmail.com"
                 },
                 new Paint
                 {
@@ -71,7 +71,7 @@ namespace HobbyListForHobbyist.Data
                     ColorName = "Patriot Green",
                     Manufacturer = "Forge Fire",
                     ProductNumber = "44",
-                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                    Email = "admin@gmail.com"
                 },
                 new Paint
                 {
@@ -79,7 +79,7 @@ namespace HobbyListForHobbyist.Data
                     ColorName = "Alabaster",
                     Manufacturer = "Forge Fire",
                     ProductNumber = "78",
-                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                    Email = "admin@gmail.com"
                 }
                 );
             modelBuilder.Entity<Supply>().HasData(
@@ -88,14 +88,14 @@ namespace HobbyListForHobbyist.Data
                     Id = 1,
                     Name = "Snipps",
                     Category = "Cutting",
-                    Email = "test11@gmail.com"
+                    Email = "admin@gmail.com"
                 },
                 new Supply
                 {
                     Id = 2,
                     Name = "Plastiweld",
                     Category = "Glue",
-                    Email = "test11@gmail.com"
+                    Email = "admin@gmail.com"
                 }
                 );
             modelBuilder.Entity<MiniWishList>().HasData(
@@ -109,7 +109,7 @@ namespace HobbyListForHobbyist.Data
                     Faction = "East Army",
                     PointCost = 250,
                     Price = 20.00m,
-                    UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                    Email = "admin@gmail.com"
                 },
                  new MiniWishList
                  {
@@ -121,7 +121,7 @@ namespace HobbyListForHobbyist.Data
                      Faction = "West Army",
                      PointCost = 250,
                      Price = 35.00m,
-                     UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                     Email = "admin@gmail.com"
                  },
                   new MiniWishList
                   {
@@ -133,7 +133,7 @@ namespace HobbyListForHobbyist.Data
                       Faction = "North Army",
                       PointCost = 250,
                       Price = 10m,
-                      UserId = "f8166767-8e3a-4fbc-a179-a3dab9540c10"
+                      Email = "admin@gmail.com"
                   }
                 );
 

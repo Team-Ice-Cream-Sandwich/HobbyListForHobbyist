@@ -26,7 +26,7 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // CreateAMiniModel
-        public async Task<MiniModelDTO> Create(MiniModelDTO miniModel, string userId)
+        public async Task<MiniModelDTO> Create(MiniModelDTO miniModel, string email)
         {
             //========================= TODO Test user ID =========================
             Enum.TryParse(miniModel.BuildState, out BuildState buildState);
@@ -39,7 +39,7 @@ namespace HobbyListForHobbyist.Models.Services
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
                 BuildState = buildState,
-                UserId = userId
+                Email = email                
             };
 
 
@@ -50,9 +50,9 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAMiniModel
-        public async Task<MiniModelDTO> GetMiniModel(int id, string userId)
+        public async Task<MiniModelDTO> GetMiniModel(int id, string email)
         {
-            MiniModel miniModel = await _context.MiniModels.Where(x=>x.UserId == userId)
+            MiniModel miniModel = await _context.MiniModels.Where(x=>x.Email == email)
                                                            .FirstOrDefaultAsync(x=>x.Id == id);
 
             var paintList = await _context.MinisToPaint.Where(x => x.MiniModelId == id)
@@ -63,17 +63,17 @@ namespace HobbyListForHobbyist.Models.Services
                                                            .Include(x=>x.Supply)
                                                            .ToListAsync();
 
-            // ============ TODO: Needs Testing =============
+            // ============ TODO: Needs Testing/FIXING =============
             List<PaintDTO> paints = new List<PaintDTO>();
             List<SupplyDTO> supplies = new List<SupplyDTO>();
             foreach (var item in paintList)
             {
-                paints.Add(await _paint.GetPaint(item.Paint.Id, userId));
+                paints.Add(await _paint.GetPaint(item.Paint.Id, email));
             }
 
             foreach (var item in suppliesList)
             {
-                supplies.Add(await _supply.GetSupply(item.Supply.Id, userId));
+                supplies.Add(await _supply.GetSupply(item.Supply.Id, email));
             }
 
 
@@ -92,9 +92,9 @@ namespace HobbyListForHobbyist.Models.Services
             return miniDto;
         }
         // GetAllMiniModelsOfState
-        public async Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState, string userId)
+        public async Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState, string email)
         {
-            List<MiniModel> miniList = await _context.MiniModels.Where(x => x.BuildState == buildState && x.UserId == userId)
+            List<MiniModel> miniList = await _context.MiniModels.Where(x => x.BuildState == buildState && x.Email == email)
                                                                 .ToListAsync();
 
             List<MiniModelDTO> miniDTOList = new List<MiniModelDTO>();
@@ -113,12 +113,12 @@ namespace HobbyListForHobbyist.Models.Services
                 List<SupplyDTO> supplies = new List<SupplyDTO>();
                 foreach (var item in paintList)
                 {
-                    paints.Add(await _paint.GetPaint(item.Paint.Id, userId));
+                    paints.Add(await _paint.GetPaint(item.Paint.Id, email));
                 }
 
                 foreach (var item in suppliesList)
                 {
-                    supplies.Add(await _supply.GetSupply(item.Supply.Id, userId));
+                    supplies.Add(await _supply.GetSupply(item.Supply.Id, email));
                 }
 
                 miniDTOList.Add(new MiniModelDTO
@@ -140,9 +140,9 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAllMiniModels
-        public async Task<List<MiniModelDTO>> GetAllMiniModels(string userId)
+        public async Task<List<MiniModelDTO>> GetAllMiniModels(string email)
         {
-            List<MiniModel> miniList = await _context.MiniModels.Where(x=>x.UserId==userId)
+            List<MiniModel> miniList = await _context.MiniModels.Where(x=>x.Email==email)
                                                                 .ToListAsync();
 
             List<MiniModelDTO> miniDTOList = new List<MiniModelDTO>();
@@ -162,12 +162,12 @@ namespace HobbyListForHobbyist.Models.Services
                 List<SupplyDTO> supplies = new List<SupplyDTO>();
                 foreach (var item in paintList)
                 {
-                    paints.Add(await _paint.GetPaint(item.Paint.Id, userId));
+                    paints.Add(await _paint.GetPaint(item.Paint.Id, email));
                 }
 
                 foreach (var item in suppliesList)
                 {
-                    supplies.Add(await _supply.GetSupply(item.Supply.Id, userId));
+                    supplies.Add(await _supply.GetSupply(item.Supply.Id, email));
                 }
 
                 miniDTOList.Add(new MiniModelDTO

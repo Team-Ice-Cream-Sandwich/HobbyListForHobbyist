@@ -23,7 +23,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         Task Delete(int id);
 
         // add wishlist to model
-        Task AddMiniWishListToMiniModel(string userId, MiniWishListDTO wishListDto);
+        Task AddMiniWishListToMiniModel(string userId, int id);
 
     }
 }

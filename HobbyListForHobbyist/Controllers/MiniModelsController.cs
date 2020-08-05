@@ -32,7 +32,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpPost]
         public async Task<ActionResult<MiniModelDTO>> PostMiniModel(MiniModelDTO miniModel)
         {
-            await _miniModel.Create(miniModel, GetUserId());            
+            await _miniModel.Create(miniModel, GetUserEmail());            
 
             return CreatedAtAction("GetMiniModel", new { id = miniModel.Id }, miniModel);
         }
@@ -41,7 +41,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MiniModelDTO>>> GetMiniModels()
         {
-            List<MiniModelDTO> miniModels = await _miniModel.GetAllMiniModels(GetUserId());
+            List<MiniModelDTO> miniModels = await _miniModel.GetAllMiniModels(GetUserEmail());
             
             return miniModels;
         }
@@ -50,7 +50,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("BuildState/{buildState}")]
         public async Task<ActionResult<IEnumerable<MiniModelDTO>>> GetMiniModelsOfState(BuildState buildState)
         {
-            var miniModels = await _miniModel.GetAMiniModelOfState(buildState, GetUserId());
+            var miniModels = await _miniModel.GetAMiniModelOfState(buildState, GetUserEmail());
 
             return miniModels;
         }
@@ -59,7 +59,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MiniModelDTO>> GetMiniModel(int id)
         {
-            MiniModelDTO miniModel = await _miniModel.GetMiniModel(id, GetUserId());
+            MiniModelDTO miniModel = await _miniModel.GetMiniModel(id, GetUserEmail());
 
             return miniModel;
         }

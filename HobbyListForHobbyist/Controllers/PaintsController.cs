@@ -10,6 +10,7 @@ using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.Interfaces;
 using HobbyListForHobbyist.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace HobbyListForHobbyist.Controllers
 {
@@ -19,11 +20,13 @@ namespace HobbyListForHobbyist.Controllers
     public class PaintsController : ControllerBase
     {
         private readonly IPaint _paint;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PaintsController(IPaint paint)
+        public PaintsController(IPaint paint, UserManager<ApplicationUser> userManager)
         {
            
             _paint = paint;
+            _userManager = userManager;
         }
 
         // POST: api/Paints
@@ -48,7 +51,9 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PaintDTO>> GetPaint(int id)
         {
-            var paintdto = await _paint.GetPaint(id, GetUserId());
+          
+            
+                var paintdto = await _paint.GetPaint(id, GetUserId());
 
             if (paintdto == null)
             {
