@@ -40,7 +40,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         /// <param name="supplyDTO">this selects the minimodel DTO (what parameters are shown to user)</param>
         /// <param name="email">checks to see if user has authorization for selected minimodel item</param>
         /// <returns>the minimodel dto with the updated minimodel item</returns>
-        Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id);
+        Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email);
         // DeleteAMiniModel
         // DeleteAMiniModel
         /// <summary>

@@ -209,7 +209,9 @@ namespace HobbyListForHobbyist.Models.Services
         /// <param name="supplyDTO">this selects the minimodel DTO (what parameters are shown to user)</param>
         /// <param name="email">checks to see if user has authorization for selected minimodel item</param>
         /// <returns>the minimodel dto with the updated minimodel item</returns>
-        public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id)
+
+
+        public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email)
         {
             Enum.TryParse(miniModel.BuildState, out BuildState buildState);
 
@@ -220,7 +222,8 @@ namespace HobbyListForHobbyist.Models.Services
                 Manufacturer = miniModel.Manufacturer,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                BuildState = buildState
+                BuildState = buildState,
+                Email = email
             };
 
             _context.Entry(updatedMiniModel).State = EntityState.Modified;

@@ -12,7 +12,7 @@ namespace HobbyListForHobbyist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   [AllowAnonymous]
+   [Authorize]
     public class MiniWishListController : ControllerBase
     {
         private IMiniWishList _wishList;
@@ -50,7 +50,7 @@ namespace HobbyListForHobbyist.Controllers
             return wishListDto;
         }
 
-        // GET: api/MiniWishList /5
+        // GET: api/MiniWishList/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MiniWishListDTO>> GetMiniInWishList(int id)
         {
@@ -68,17 +68,14 @@ namespace HobbyListForHobbyist.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMiniInWishList(int id, MiniWishListDTO wishListDto)
+        public async Task<IActionResult> PutMiniInWishList( MiniWishListDTO wishListDto, int id)
         {
             if (id != wishListDto.Id)
             {
                 return BadRequest();
             }
 
-            var updatedWishListDto = await _wishList.Update(wishListDto, id);
-
-
-
+            var updatedWishListDto = await _wishList.Update(wishListDto, id, GetUserEmail());
             return Ok(updatedWishListDto);
         }
 

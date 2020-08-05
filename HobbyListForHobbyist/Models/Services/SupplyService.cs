@@ -70,8 +70,8 @@ namespace HobbyListForHobbyist.Models.Services
                 Id= supplyItem.Id,
                 Name = supplyItem.Name,
                 Category = supplyItem.Category
-
             };
+
             return supply;
         }
         // UpdateASupply
