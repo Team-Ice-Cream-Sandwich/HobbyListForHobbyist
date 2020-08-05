@@ -44,18 +44,18 @@ namespace HobbyListForHobbyist.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{supplyId}")]
-        public async Task<IActionResult> PutSupply(int supplyId, SupplyDTO supplyDTO)
+        public async Task<IActionResult> PutSupply(int supplyId, SupplyDTO supplyDTO, string email)
         {
             if (supplyId != supplyDTO.Id)
             {
                 return BadRequest();
             }
-            var updatedSupply = await _supply.Update(supplyDTO);
+            var updatedSupply = await _supply.Update(supplyDTO, email);
             return Ok(updatedSupply);
         }
 
         // POST: api/Supplies
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you may want to bind to, for
         // more details, please see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<SupplyDTO>> PostSupply(SupplyDTO supply)

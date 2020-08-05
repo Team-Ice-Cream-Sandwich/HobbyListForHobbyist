@@ -59,7 +59,7 @@ namespace HobbyListForHobbyist.Models.Services
             return supply;
         }
         // UpdateASupply
-        public async Task<SupplyDTO> Update(SupplyDTO supplyDTO)
+        public async Task<SupplyDTO> Update(SupplyDTO supplyDTO, string email)
         {
             Supply supply = new Supply() { Id = supplyDTO.Id, Name = supplyDTO.Name, Category = supplyDTO.Category };
             _context.Entry(supply).State = EntityState.Modified;
