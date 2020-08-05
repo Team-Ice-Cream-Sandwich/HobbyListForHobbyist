@@ -13,12 +13,22 @@ namespace HobbyListForHobbyist.Models.Services
     {
       private  HobbyListDbContext _context;
 
+        /// <summary>
+        /// injects the db into the class
+        /// </summary>
+        /// <param name="context"> Database</param>
         public PaintService(HobbyListDbContext context)
         {
             _context = context;
         }
 
         // CreateAPaint
+        /// <summary>
+        /// Creates A paint and saves it into the db
+        /// </summary>
+        /// <param name="paintdto"> instance of the PaintDTO</param>
+        /// <param name="email"> users email</param>
+        /// <returns> a paintdto </returns>
         public async Task<PaintDTO> Create(PaintDTO paintdto, string email)
         {
             Paint paint = new Paint()
@@ -35,6 +45,12 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAPaint
+        /// <summary>
+        /// Gets a singular paint 
+        /// </summary>
+        /// <param name="id">integer for the id  </param>
+        /// <param name="email"> users email </param>
+        /// <returns> a singular paintdto object </returns>
         public async Task<PaintDTO> GetPaint(int id, string email)
         {
             Paint paint = await _context.Paints.Where(x => x.Email == email)
@@ -51,6 +67,11 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // GetAllPaints
+        /// <summary>
+        /// Gets all of the paint
+        /// </summary>
+        /// <param name="email"> Users email</param>
+        /// <returns> all paintdto objects</returns>
         public async Task<List<PaintDTO>> GetPaints(string email)
         {
             var paint = await _context.Paints.Where(x => x.Email == email)
@@ -67,14 +88,21 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // UpdateAPaint
-        public async Task<PaintDTO> Update(PaintDTO paintdto)
+        /// <summary>
+        /// Updates a paint and saves it into the db 
+        /// </summary>
+        /// <param name="paintdto"> dto for paint</param>
+        /// <param name="email">users email</param>
+        /// <returns> paintdto object</returns>
+        public async Task<PaintDTO> Update(PaintDTO paintdto , string email)
         {
             Paint paint = new Paint()
             {
                 Id = paintdto.Id,
                 ColorName = paintdto.ColorName,
                 ProductNumber = paintdto.ProductNumber,
-                Manufacturer = paintdto.Manufacturer
+                Manufacturer = paintdto.Manufacturer,
+                Email = email
             };
             _context.Entry(paint).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -82,6 +110,11 @@ namespace HobbyListForHobbyist.Models.Services
         }
 
         // DeleteAPaint
+        /// <summary>
+        /// Deletes a paint from the db
+        /// </summary>
+        /// <param name="id">integer for id </param>
+        /// <returns>task completion</returns>
         public async Task Delete(int id)
         {
             Paint paint = await _context.Paints.FindAsync(id);
