@@ -15,7 +15,8 @@ namespace HobbyListForHobbyist.Models
         public string Faction { get; set; }
         public int PointCost { get; set; }
         public BuildState BuildState { get; set; }
-        public string UserId { get; set; }
+        public string Email { get; set; }
+        //public string UserId { get; set; }
 
         // Nav Properties
         public List<MiniToSupply> MinisToSupplies { get; set; }
