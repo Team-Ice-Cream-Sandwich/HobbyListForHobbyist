@@ -21,7 +21,7 @@ namespace HobbyListTests
             service.AddTransient<ISupply, SupplyService>();            
         }
     }
-    class DatabaseTestBase : IDisposable
+    public class DatabaseTestBase : IDisposable
     {
         private readonly SqliteConnection _connection;
         protected readonly HobbyListDbContext _db;
