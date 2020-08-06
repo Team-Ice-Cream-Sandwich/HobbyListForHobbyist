@@ -60,7 +60,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpPost]
         public async Task<ActionResult<SupplyDTO>> PostSupply(SupplyDTO supply)
         {
-            await _supply.Create(supply);
+            await _supply.Create(supply, GetUserEmail());
             return CreatedAtAction("GetSupply", new { id = supply.Id }, supply);
         }
 

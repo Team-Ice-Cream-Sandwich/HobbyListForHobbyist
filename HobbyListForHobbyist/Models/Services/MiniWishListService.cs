@@ -66,6 +66,7 @@ namespace HobbyListForHobbyist.Models.Services
                 Id = wishList.Id,
                 Name = wishList.Name,
                 Manufacturer = wishList.Manufacturer,
+                PartNumber = wishList.PartNumber,
                 Faction = wishList.Faction,
                 PointCost = wishList.PointCost,
                 Price = wishList.Price,

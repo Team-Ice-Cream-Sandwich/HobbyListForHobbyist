@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace HobbyListForHobbyist.Models.Services
 {
-    public class SupplyService : ISupply {
+    public class SupplyService : ISupply
+    {
         private HobbyListDbContext _context;
         public SupplyService(HobbyListDbContext context)
         {
@@ -22,10 +23,16 @@ namespace HobbyListForHobbyist.Models.Services
         /// The below method allows one to create an item to be stored within Supply
         /// </summary>
         /// <param name="supplyName">the name of the supply item</param>
+        /// <param name="email">the email for the user</param>
         /// <returns>the newly added supply item</returns>
-        public async Task<SupplyDTO> Create(SupplyDTO supplyName)
+        public async Task<SupplyDTO> Create(SupplyDTO supplyName, string email)
         {
-            Supply supply = new Supply() { Name = supplyName.Name, Category = supplyName.Category };
+            Supply supply = new Supply()
+            {
+                Name = supplyName.Name,
+                Category = supplyName.Category,
+                Email = email
+            };
             _context.Entry(supply).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             await _context.SaveChangesAsync();
             return supplyName;
@@ -46,7 +53,7 @@ namespace HobbyListForHobbyist.Models.Services
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Category = item.Category,                    
+                    Category = item.Category,
                 });
             }
             return dtos;
@@ -67,7 +74,7 @@ namespace HobbyListForHobbyist.Models.Services
 
             SupplyDTO supply = new SupplyDTO()
             {
-                Id= supplyItem.Id,
+                Id = supplyItem.Id,
                 Name = supplyItem.Name,
                 Category = supplyItem.Category
             };
@@ -98,7 +105,7 @@ namespace HobbyListForHobbyist.Models.Services
         {
             Supply supply = await _context.Supplies.FindAsync(supplyId);
             _context.Entry(supply).State = EntityState.Deleted;
-           await  _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

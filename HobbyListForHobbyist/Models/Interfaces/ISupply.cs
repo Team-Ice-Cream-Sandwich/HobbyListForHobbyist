@@ -14,8 +14,9 @@ namespace HobbyListForHobbyist.Models.Interfaces
         /// The below method allows one to create an item to be stored within Supply
         /// </summary>
         /// <param name="supplyName">the name of the supply item</param>
+        /// <param name="email">the email for the user</param>
         /// <returns>the newly added supply item</returns>
-        Task<SupplyDTO> Create(SupplyDTO supplyName);
+        Task<SupplyDTO> Create(SupplyDTO supplyName, string email);
         // GetAllSupplies
         // GetAllSupplies
         /// <summary>
