@@ -15,8 +15,7 @@ namespace HobbyListForHobbyist.Controllers
    [Authorize]
     public class MiniWishListController : ControllerBase
     {
-        private IMiniWishList _wishList;
-      
+        private IMiniWishList _wishList;      
 
         public MiniWishListController(IMiniWishList wishList)
         {
@@ -30,7 +29,6 @@ namespace HobbyListForHobbyist.Controllers
         [HttpPost]
         public async Task<ActionResult<MiniWishListDTO>> PostAllInMiniWishList(MiniWishListDTO wishListDto)
         {
-
             await _wishList.Create(wishListDto, GetUserEmail());
             return CreatedAtAction("GetMiniModelInWishList", new { id = wishListDto.Id }, wishListDto);
         }
@@ -42,6 +40,7 @@ namespace HobbyListForHobbyist.Controllers
             await _wishList.AddMiniWishListToMiniModel(GetUserEmail(), id);
             return Ok();
         }
+
         // GET: api/MiniWishList 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MiniWishListDTO>>> GetAllInWishList()

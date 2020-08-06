@@ -51,6 +51,7 @@ namespace HobbyListForHobbyist.Controllers
             {
                 return BadRequest();
             }
+
             var updatedSupply = await _supply.Update(supplyDTO, GetUserEmail());
             return Ok(updatedSupply);
         }
@@ -72,10 +73,10 @@ namespace HobbyListForHobbyist.Controllers
             await _supply.Delete(supplyId);
             return NoContent();
         }
+
         protected string GetUserEmail()
         {
             return User.Claims.First(x => x.Type == "Email").Value;
-        }       
-
+        }      
     }
 }

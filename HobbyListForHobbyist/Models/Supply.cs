@@ -13,8 +13,7 @@ namespace HobbyListForHobbyist.Models
         public string Category { get; set; }
         public string Email { get; set; }
 
-
         // Nav Properties
-       public List<MiniToSupply> MiniToSupply { get; set; }
+        public List<MiniToSupply> MiniToSupply { get; set; }
     }
 }
