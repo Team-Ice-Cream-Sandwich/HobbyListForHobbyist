@@ -52,7 +52,7 @@ button.accept-policy {
 }
 
 first-body-area {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -71,4 +71,10 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.footerImages {
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
