@@ -12,7 +12,7 @@ namespace HobbyListForHobbyist.Data
     {
         public HobbyListDbContext(DbContextOptions<HobbyListDbContext> options) : base(options)
         {
-            // IntentC:\Users\yasmo\Source\Repos\HobbyListForHobbyist\HobbyListForHobbyist\Data\HobbyListDbContext.csionally left Blank
+            // Intentionally left Blank
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

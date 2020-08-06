@@ -10,6 +10,7 @@ using HobbyListForHobbyist.Models;
 using HobbyListForHobbyist.Models.DTOs;
 using HobbyListForHobbyist.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Dynamic;
 
 namespace HobbyListForHobbyist.Controllers
 {
@@ -27,16 +28,16 @@ namespace HobbyListForHobbyist.Controllers
 
         // GET: api/Supplies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply(string email)
+        public async Task<ActionResult<IEnumerable<SupplyDTO>>> GetSupply()
         {
-            return await _supply.GetSupplies(email);
+            return await _supply.GetSupplies(GetUserEmail());
         }
 
         // GET: api/Supplies/5
         [HttpGet("{supplyId}")]
-        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId, string email)
+        public async Task<ActionResult<SupplyDTO>> GetSupply(int supplyId)
         {
-            SupplyDTO supply = await _supply.GetSupply(supplyId, email);
+            SupplyDTO supply = await _supply.GetSupply(supplyId, GetUserEmail());
             return supply;
         }
 
@@ -44,13 +45,14 @@ namespace HobbyListForHobbyist.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{supplyId}")]
-        public async Task<IActionResult> PutSupply(int supplyId, SupplyDTO supplyDTO, string email)
+        public async Task<IActionResult> PutSupply(int supplyId, SupplyDTO supplyDTO)
         {
             if (supplyId != supplyDTO.Id)
             {
                 return BadRequest();
             }
-            var updatedSupply = await _supply.Update(supplyDTO, email);
+
+            var updatedSupply = await _supply.Update(supplyDTO, GetUserEmail());
             return Ok(updatedSupply);
         }
 
@@ -71,10 +73,10 @@ namespace HobbyListForHobbyist.Controllers
             await _supply.Delete(supplyId);
             return NoContent();
         }
+
         protected string GetUserEmail()
         {
             return User.Claims.First(x => x.Type == "Email").Value;
-        }       
-
+        }      
     }
 }

@@ -37,6 +37,7 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
             return supplyName;
         }
+
         // GetAllSupplies
         /// <summary>
         /// the below method allows one to seach for a particular supply item
@@ -81,6 +82,7 @@ namespace HobbyListForHobbyist.Models.Services
 
             return supply;
         }
+
         // UpdateASupply
         /// <summary>
         /// the below method updates a particular supply item in the database
@@ -95,6 +97,7 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
             return supplyDTO;
         }
+
         // DeleteASupply
         /// <summary>
         /// the below method deletes a supply item from the database

@@ -24,7 +24,6 @@ namespace HobbyListForHobbyist.Controllers
 
         public PaintsController(IPaint paint, UserManager<ApplicationUser> userManager)
         {
-           
             _paint = paint;
             _userManager = userManager;
         }
@@ -35,7 +34,6 @@ namespace HobbyListForHobbyist.Controllers
         [HttpPost]
         public async Task<ActionResult<Paint>> PostPaint(PaintDTO paintdto)
         {
-
             await _paint.Create(paintdto, GetUserEmail());
             return CreatedAtAction("GetPaint", new { id = paintdto.Id }, paintdto);
         }
@@ -51,9 +49,7 @@ namespace HobbyListForHobbyist.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PaintDTO>> GetPaint(int id)
         {
-          
-            
-                var paintdto = await _paint.GetPaint(id, GetUserEmail());
+            var paintdto = await _paint.GetPaint(id, GetUserEmail());
 
             if (paintdto == null)
             {
@@ -76,8 +72,6 @@ namespace HobbyListForHobbyist.Controllers
 
             var updatedPaintdto = await _paint.Update(paintdto, GetUserEmail());
 
-          
-
             return Ok(updatedPaintdto);
         }
 
@@ -86,7 +80,7 @@ namespace HobbyListForHobbyist.Controllers
         public async Task<ActionResult<PaintDTO>> DeletePaint(int id)
         {
             await _paint.Delete(id);
-                return NoContent();
+            return NoContent();
         }
 
         protected string GetUserId()

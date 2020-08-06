@@ -89,7 +89,6 @@ namespace HobbyListForHobbyist.Controllers
             return Ok();
         }
 
-
         // POST: api/MiniModels/5/Paint/5
         [HttpPost("{miniId}/Paint/{paintId}")]
         public async Task<IActionResult> PostPaintToMini(int miniId, int paintId)

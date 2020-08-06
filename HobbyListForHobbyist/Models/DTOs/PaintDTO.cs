@@ -11,6 +11,5 @@ namespace HobbyListForHobbyist.Models.DTOs
         public string ColorName { get; set; }
         public string Manufacturer { get; set; }
         public string ProductNumber { get; set; }
-
     }
 }

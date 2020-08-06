@@ -15,6 +15,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         /// <param name="supplyName">the name of the minimodel item</param>
         /// <returns>the newly added minimodel item</returns>
         Task<MiniModelDTO> Create(MiniModelDTO miniModel, string email);
+
         // GetAMiniModel
         /// <summary>
         /// the below method allows one to seach for a particular minimodel item
@@ -22,8 +23,16 @@ namespace HobbyListForHobbyist.Models.Interfaces
         /// <param name="email">this is the email associated with the current user (ensures they have access to minimodel item)</param>
         /// <returns>the minimodel item in question</returns>
         Task<MiniModelDTO> GetMiniModel(int id, string email);
+
         // GetAllMiniModelsOfState
+        /// <summary>
+        /// the below method brings up to the user all minimodels oh a sepcified buildstate items currently in their table
+        /// </summary>
+        /// <param name="buildState">takes a buildstate enum</param>
+        /// <param name="email">a string for the the email</param>
+        /// <returns></returns>
         Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState, string email);
+
         // GetAllMiniModels
         /// <summary>
         /// the below method brings up to the user all minimodels items currently in their table
@@ -32,7 +41,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         /// <param name="email">authenticates the user's access level for the minimodel items</param>
         /// <returns>the minimodels items in the database</returns>
         Task<List<MiniModelDTO>> GetAllMiniModels(string email);
-        // UpdateAMiniModel
+
         // UpdateAMiniModel
         /// <summary>
         /// the below method updates a particular minimodel item in the database
@@ -41,7 +50,7 @@ namespace HobbyListForHobbyist.Models.Interfaces
         /// <param name="email">checks to see if user has authorization for selected minimodel item</param>
         /// <returns>the minimodel dto with the updated minimodel item</returns>
         Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email);
-        // DeleteAMiniModel
+        
         // DeleteAMiniModel
         /// <summary>
         /// the below method deletes a minimodel item from the database
