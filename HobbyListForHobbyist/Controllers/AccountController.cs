@@ -23,7 +23,6 @@ namespace HobbyListForHobbyist.Controllers
     [Authorize]
     public class AccountController : ControllerBase
     {
-
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _config;
@@ -59,7 +58,6 @@ namespace HobbyListForHobbyist.Controllers
 
                 return Ok();
             }
-
             return BadRequest("Invalid Registration");
         }
 
@@ -88,7 +86,6 @@ namespace HobbyListForHobbyist.Controllers
             return BadRequest("Invalid Attempt");
         }
 
-
         // assign roles
         // POST: api/assign/role
         [HttpPost("assign/role")]
@@ -102,8 +99,7 @@ namespace HobbyListForHobbyist.Controllers
 
         //Create Token
         private JwtSecurityToken CreateToken(ApplicationUser user, List<string> role)
-        {
-            // ============== TODO Decide on claims =====================
+        {            
             var authClaims = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
@@ -139,6 +135,5 @@ namespace HobbyListForHobbyist.Controllers
 
             return token;
         }
-
     }
 }

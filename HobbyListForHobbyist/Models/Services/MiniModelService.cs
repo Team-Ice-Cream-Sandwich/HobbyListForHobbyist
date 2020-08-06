@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.WebSockets;
 
 namespace HobbyListForHobbyist.Models.Services
 {
@@ -32,8 +33,7 @@ namespace HobbyListForHobbyist.Models.Services
         /// <param name="supplyName">the name of the minimodel item</param>
         /// <returns>the newly added minimodel item</returns>
         public async Task<MiniModelDTO> Create(MiniModelDTO miniModel, string email)
-        {
-            //========================= TODO Test user ID =========================
+        {            
             Enum.TryParse(miniModel.BuildState, out BuildState buildState);
 
             MiniModel entity = new MiniModel()
@@ -71,8 +71,7 @@ namespace HobbyListForHobbyist.Models.Services
             var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == id)
                                                            .Include(x=>x.Supply)
                                                            .ToListAsync();
-
-            // ============ TODO: Needs Testing/FIXING =============
+                        
             List<PaintDTO> paints = new List<PaintDTO>();
             List<SupplyDTO> supplies = new List<SupplyDTO>();
             foreach (var item in paintList)
@@ -151,9 +150,7 @@ namespace HobbyListForHobbyist.Models.Services
                 }
                 );
             }
-
             return miniDTOList;
-
         }
 
         // GetAllMiniModels
@@ -166,20 +163,19 @@ namespace HobbyListForHobbyist.Models.Services
         public async Task<List<MiniModelDTO>> GetAllMiniModels(string email)
         {
             List<MiniModel> miniList = await _context.MiniModels.Where(x=>x.Email==email)
-                                                                .ToListAsync();
+                                                                .ToListAsync();            
 
             List<MiniModelDTO> miniDTOList = new List<MiniModelDTO>();
 
             foreach (var mini in miniList)
             {
                 var paintList = await _context.MinisToPaint.Where(x => x.MiniModelId == mini.Id)
-                                                      .Include(x => x.Paint)
-                                                      .ToListAsync();
-
-                var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == mini.Id)
-                                                           .Include(x => x.Supply)
+                                                           .Include(x => x.Paint)
                                                            .ToListAsync();
 
+                var suppliesList = await _context.MinisToSupply.Where(x => x.MiniModelId == mini.Id)
+                                                               .Include(x => x.Supply)
+                                                               .ToListAsync();
              
                 List<PaintDTO> paints = new List<PaintDTO>();
                 List<SupplyDTO> supplies = new List<SupplyDTO>();
@@ -207,7 +203,6 @@ namespace HobbyListForHobbyist.Models.Services
                 }
                 );
             }
-
             return miniDTOList;
         }
 
@@ -253,10 +248,14 @@ namespace HobbyListForHobbyist.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        // add a paint to a model
+        /// <summary>
+        /// Add a Paint to a Model
+        /// </summary>
+        /// <param name="miniModelId">Int for the miniModelId</param>
+        /// <param name="paintId">Int for the paintId</param>
+        /// <returns>Async version of void</returns>
         public async Task AddAPaintToAModel(int miniModelId, int paintId)
-        {
-            // ================== TODO Check for UserId ==========================
+        {            
             MiniToPaint miniPaint = new MiniToPaint()
             {
                 MiniModelId = miniModelId,
@@ -266,19 +265,29 @@ namespace HobbyListForHobbyist.Models.Services
             _context.Entry(miniPaint).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
-        // remove a paint from a model
+
+
+        /// <summary>
+        /// Remove a Paint from a Model
+        /// </summary>
+        /// <param name="miniModelId">Int for the miniModelId</param>
+        /// <param name="paintId">Int for the paintId</param>
+        /// <returns>Async version of void</returns>
         public async Task RemoveAPaintToAModel(int miniModelId, int paintId)
-        {
-            // ================== TODO Check for UserId ==========================
+        {            
             var result = await _context.MinisToPaint.FirstOrDefaultAsync(x => x.MiniModelId == miniModelId && x.PaintId == paintId);
             _context.Entry(result).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
-
-        // add a supply to a model
+                
+        /// <summary>
+        /// Add a Supply to a Model
+        /// </summary>
+        /// <param name="miniModelId">Int for the miniModelId</param>
+        /// <param name="paintId">Int for the supplyId</param>
+        /// <returns>Async version of void</returns>
         public async Task AddASupplytToAModel(int miniModelId, int supplyId)
-        {
-            // ================== TODO Check for UserId ==========================
+        {            
             MiniToSupply miniSupply = new MiniToSupply()
             {
                 MiniModelId = miniModelId,
@@ -288,10 +297,15 @@ namespace HobbyListForHobbyist.Models.Services
             _context.Entry(miniSupply).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
-        // remove a supply from a model
+  
+        /// <summary>
+        /// Remove a Supply from a Model
+        /// </summary>
+        /// <param name="miniModelId">Int for the miniModelId</param>
+        /// <param name="paintId">Int for the supplyId</param>
+        /// <returns>Async version of void</returns>
         public async Task RemoveASupplyToAModel(int miniModelId, int supplyId)
-        {
-            // ================== TODO Check for UserId ==========================
+        {            
             var result = await _context.MinisToSupply.FirstOrDefaultAsync(x => x.MiniModelId == miniModelId && x.SupplyId == supplyId);
             _context.Entry(result).State = EntityState.Deleted;
             await _context.SaveChangesAsync();

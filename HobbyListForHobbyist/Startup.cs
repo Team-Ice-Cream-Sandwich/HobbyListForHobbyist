@@ -35,12 +35,12 @@ namespace HobbyListForHobbyist
             builder.AddUserSecrets<Startup>();
             Configuration = builder.Build();
         }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // ========= Added this for views ===============
-
+            // ========= VIEWS ===============
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AuthorizeFilter());
@@ -49,14 +49,6 @@ namespace HobbyListForHobbyist
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
             // ==========================================
-
-            //services.AddControllers(options => 
-            //{
-            //    options.Filters.Add(new AuthorizeFilter());
-            //})
-            //    .AddNewtonsoftJson(options =>
-            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //    );
 
             services.AddDbContext<HobbyListDbContext>(options =>
             {
@@ -68,7 +60,6 @@ namespace HobbyListForHobbyist
                     .AddDefaultTokenProviders();
 
             // =============== SWAGGER ==========================
-            //services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HobbyList", Version = "v1" });
@@ -122,7 +113,6 @@ namespace HobbyListForHobbyist
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -135,10 +125,7 @@ namespace HobbyListForHobbyist
                 app.UseHsts();
             }
 
-
             app.UseHttpsRedirection();
-
-
 
             app.UseStaticFiles();
             // ========================================
@@ -157,10 +144,8 @@ namespace HobbyListForHobbyist
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            // =============== Here ==================
             RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
 
             app.UseEndpoints(endpoints =>
@@ -168,7 +153,6 @@ namespace HobbyListForHobbyist
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
 
         private class AuthenticationRequirementOperationFilter : IOperationFilter
         {

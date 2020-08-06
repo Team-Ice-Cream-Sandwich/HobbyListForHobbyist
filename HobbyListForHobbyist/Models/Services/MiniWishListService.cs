@@ -46,7 +46,6 @@ namespace HobbyListForHobbyist.Models.Services
             return wishListDto;
         }
 
-
         /// <summary>
         /// Gets a single miniModel in the wishlist
         /// </summary>
@@ -56,10 +55,7 @@ namespace HobbyListForHobbyist.Models.Services
         public async Task<MiniWishListDTO> GetMiniModelInWishList(int id, string email)
         {
             MiniWishList wishList = await _context.MiniWishLists.Where(x => x.Email == email)
-                                                   .FirstOrDefaultAsync(x => x.Id == id);
-
-
-          
+                                                   .FirstOrDefaultAsync(x => x.Id == id);          
 
             MiniWishListDTO wishListDto = new MiniWishListDTO()
             {
@@ -72,9 +68,7 @@ namespace HobbyListForHobbyist.Models.Services
                 Price = wishList.Price,
 
             };
-
             return wishListDto;
-
         }
 
         /// <summary>
@@ -173,8 +167,6 @@ namespace HobbyListForHobbyist.Models.Services
             _context.Entry(miniModel).State = EntityState.Added;
             _context.Entry(wishList).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
-
         }
-
     }
 }
