@@ -1,4 +1,5 @@
-﻿using HobbyListForHobbyist.Models.Interfaces;
+﻿using HobbyListForHobbyist.Models.DTOs;
+using HobbyListForHobbyist.Models.Interfaces;
 using HobbyListForHobbyist.Models.Services;
 using System;
 using System.Collections.Generic;
@@ -14,138 +15,113 @@ namespace HobbyListTests
             return new MiniWishListService(_db);
         }
 
-        //[Fact]
-        //public async void CanCreateANewMiniModel()
-        //{
-        //    var testEmail = "admin@gmail.com";
+        [Fact]
+        public async void CanCreateANewMiniModelWishList()
+        {
+            var testEmail = "admin@gmail.com";
 
-        //    var miniModel = new MiniModelDTO
-        //    {
-        //        Name = "Stromwall",
-        //        Manufacturer = "Privateer Press",
-        //        PartNumber = "PP1234",
-        //        Faction = "Cygnar",
-        //        PointCost = 38,
-        //        BuildState = "Built"
-        //    };
+            var miniWish = new MiniWishListDTO
+            {
+                Name = "Stromwall",
+                Manufacturer = "Privateer Press",
+                PartNumber = "PP1234",
+                Faction = "Cygnar",
+                PointCost = 38,
+                Price = "120"
+            };
 
-        //    var service = BuildService();
+            var service = BuildService();
 
-        //    var saved = await service.Create(miniModel, testEmail);
+            var saved = await service.Create(miniWish, testEmail);
 
-        //    Assert.NotNull(saved);
-        //    Assert.Equal(miniModel.Name, saved.Name);
-        //    Assert.Equal(miniModel.BuildState, saved.BuildState);
-        //}
+            Assert.NotNull(saved);
+            Assert.Equal(miniWish.Name, saved.Name);
+        }
 
-        //[Fact]
-        //public async void CanGetAMiniModel()
-        //{
-        //    var testEmail = "admin@gmail.com";
+        [Fact]
+        public async void CanGetAMiniModelFromTheWishlist()
+        {
+            var testEmail = "admin@gmail.com";
 
-        //    var service = BuildService();
+            var service = BuildService();
 
-        //    var expected = "Platoon Leader";
-        //    var returnFromMethod = await service.GetMiniModel(1, testEmail);
+            var expected = "Chariot Personnel Carrier";
+            var returnFromMethod = await service.GetMiniModelInWishList(1, testEmail);
 
-        //    Assert.NotNull(returnFromMethod);
-        //    Assert.Equal(expected, returnFromMethod.Name);
-        //}
+            Assert.NotNull(returnFromMethod);
+            Assert.Equal(expected, returnFromMethod.Name);
+        }
 
-        //[Fact]
-        //public async void CanGetAllMiniModelsOfBuildState()
-        //{
-        //    var testEmail = "admin@gmail.com";
-        //    var service = BuildService();
+        [Fact]
+        public async void CanGetAllMiniModelWishListItems()
+        {
+            var testEmail = "admin@gmail.com";
+            var service = BuildService();
 
-        //    var expectedList = new List<string>()
-        //    {
-        //        "Heavy Support Squad"
-        //    };
+            var expectedList = new List<string>()
+            {
+                "Chariot Personnel Carrier", "Heavy support Squad", "Chariot Armed Personnel Carrier"
+            };
 
-        //    var returnFromMethod = await service.GetAMiniModelOfState(BuildState.painted, testEmail);
+            var returnFromMethod = await service.GetAllMiniModelsInWishList(testEmail);
 
-        //    var returnList = new List<string>();
+            var returnList = new List<string>();
 
-        //    foreach (var item in returnFromMethod)
-        //    {
-        //        returnList.Add(item.Name);
-        //    }
+            foreach (var item in returnFromMethod)
+            {
+                returnList.Add(item.Name);
+            }
 
-        //    Assert.NotNull(returnFromMethod);
-        //    Assert.Equal(expectedList, returnList);
-        //}
+            Assert.NotNull(returnFromMethod);
+            Assert.Equal(expectedList, returnList);
+        }
 
-        //[Fact]
-        //public async void CanGetAllMiniModels()
-        //{
-        //    var testEmail = "admin@gmail.com";
-        //    var service = BuildService();
+        [Fact]
+        public async void CanUpdateAMiniModelWishlist()
+        {
+            var testEmail = "admin@gmail.com";
+            var service = BuildService();
 
-        //    var expectedList = new List<string>()
-        //    {
-        //        "Platoon Leader", "Heavy Support Squad", "Chariot Armored Personnel Carrier"
-        //    };
+            var miniWish = new MiniWishListDTO
+            {
+                Id = 1,
+                Name = "IronClad",
+                Manufacturer = "Privateer Press",
+                PartNumber = "PP0987",
+                PointCost = 40,
+                Price = "23"
+            };
 
-        //    var returnFromMethod = await service.GetAllMiniModels(testEmail);
+            await service.Update(miniWish, 1, testEmail);
+            var returnFromMethod = await service.GetMiniModelInWishList(1, testEmail);
 
-        //    var returnList = new List<string>();
+            Assert.NotNull(returnFromMethod);
+            Assert.Equal(miniWish.Name, returnFromMethod.Name);
+        }
 
-        //    foreach (var item in returnFromMethod)
-        //    {
-        //        returnList.Add(item.Name);
-        //    }
+        [Fact]
+        public async void CanDeleteAMiniWishlist()
+        {
+            var testEmail = "admin@gmail.com";
+            var service = BuildService();
 
-        //    Assert.NotNull(returnFromMethod);
-        //    Assert.Equal(expectedList, returnList);
-        //}
+            await service.Delete(1);
+            var returnFromMethod = await service.GetAllMiniModelsInWishList(testEmail);
 
-        //[Fact]
-        //public async void CanUpdateAMiniModel()
-        //{
-        //    var testEmail = "admin@gmail.com";
-        //    var service = BuildService();
+            var expected = new List<string>
+            {
+                "Heavy support Squad", "Chariot Armed Personnel Carrier"
+            };
 
-        //    var miniModel = new MiniModelDTO
-        //    {
-        //        Id = 1,
-        //        Name = "IronClad",
-        //        Manufacturer = "Privateer Press",
-        //        PartNumber = "PP0987",
-        //        PointCost = 40,
-        //        BuildState = "Painted"
-        //    };
+            var returnList = new List<string>();
 
-        //    await service.Update(miniModel, 1, testEmail);
-        //    var returnFromMethod = await service.GetMiniModel(1, testEmail);
+            foreach (var item in returnFromMethod)
+            {
+                returnList.Add(item.Name);
+            }
 
-        //    Assert.NotNull(returnFromMethod);
-        //    Assert.Equal(miniModel.Name, returnFromMethod.Name);
-        //}
-
-        //[Fact]
-        //public async void CanDeleteAMiniModel()
-        //{
-        //    var testEmail = "admin@gmail.com";
-        //    var service = BuildService();
-
-        //    await service.Delete(1);
-        //    var returnFromMethod = await service.GetAllMiniModels(testEmail);
-
-        //    var expected = new List<string>
-        //    {
-        //        "Heavy Support Squad", "Chariot Armored Personnel Carrier"
-        //    };
-
-        //    var returnList = new List<string>();
-
-        //    foreach (var item in returnFromMethod)
-        //    {
-        //        returnList.Add(item.Name);
-        //    }
-
-        //    Assert.NotNull(returnFromMethod);
-        //    Assert.Equal(expected, returnList);
-        //}
+            Assert.NotNull(returnFromMethod);
+            Assert.Equal(expected, returnList);
+        }
     }
 }
