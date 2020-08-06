@@ -27,7 +27,7 @@ namespace HobbyListTests
                 PartNumber = "PP1234",
                 Faction = "Cygnar",
                 PointCost = 38,
-                BuildState = BuildState.built
+                BuildState = "unBuilt"
             };
 
             var service = BuildService();
@@ -119,7 +119,7 @@ namespace HobbyListTests
                 PartNumber = "PP0987",
                 Faction = "Cygnar",
                 PointCost = 40,
-                BuildState = BuildState.painted
+                BuildState = "painted"
             };
 
             await service.Update(miniModel, 1, testEmail);

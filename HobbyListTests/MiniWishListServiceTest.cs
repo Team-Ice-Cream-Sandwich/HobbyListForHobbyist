@@ -36,6 +36,11 @@ namespace HobbyListTests
 
             Assert.NotNull(saved);
             Assert.Equal(miniWish.Name, saved.Name);
+            Assert.Equal(miniWish.Manufacturer, saved.Manufacturer);
+            Assert.Equal(miniWish.PartNumber, saved.PartNumber);
+            Assert.Equal(miniWish.Faction, saved.Faction);
+            Assert.Equal(miniWish.PointCost, saved.PointCost);
+            Assert.Equal(miniWish.Price, saved.Price);
         }
 
         [Fact]
@@ -96,7 +101,12 @@ namespace HobbyListTests
             var returnFromMethod = await service.GetMiniModelInWishList(1, testEmail);
 
             Assert.NotNull(returnFromMethod);
+            Assert.Equal(miniWish.Id, returnFromMethod.Id);
             Assert.Equal(miniWish.Name, returnFromMethod.Name);
+            Assert.Equal(miniWish.Manufacturer, returnFromMethod.Manufacturer);
+            Assert.Equal(miniWish.PartNumber, returnFromMethod.PartNumber);
+            Assert.Equal(miniWish.PointCost, returnFromMethod.PointCost);
+            Assert.Equal(miniWish.Price, returnFromMethod.Price);
         }
 
         [Fact]
