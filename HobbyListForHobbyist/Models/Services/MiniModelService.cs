@@ -43,11 +43,9 @@ namespace HobbyListForHobbyist.Models.Services
                 PartNumber = miniModel.PartNumber,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                // ========== HERE ==================
                 BuildState = buildState,
                 Email = email                
             };
-
 
             _context.Entry(entity).State = EntityState.Added;
             await _context.SaveChangesAsync();
@@ -57,7 +55,7 @@ namespace HobbyListForHobbyist.Models.Services
 
         // GetAMiniModel
         /// <summary>
-        /// the below method allows one to seach for a particular minimodel item
+        /// the below method allows one to search for a particular minimodel item
         /// </summary>
         /// <param name="email">this is the email associated with the current user (ensures they have access to minimodel item)</param>
         /// <returns>the minimodel item in question</returns>
@@ -87,7 +85,6 @@ namespace HobbyListForHobbyist.Models.Services
                 supplies.Add(await _supply.GetSupply(item.Supply.Id, email));
             }
 
-
             MiniModelDTO miniDto = new MiniModelDTO()
             {
                 Id = miniModel.Id,
@@ -96,7 +93,6 @@ namespace HobbyListForHobbyist.Models.Services
                 PartNumber = miniModel.PartNumber,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                // ================ HERE ==================
                 BuildState = miniModel.BuildState.ToString(),
                 Paints = paints,
                 Supplies = supplies
@@ -104,7 +100,14 @@ namespace HobbyListForHobbyist.Models.Services
 
             return miniDto;
         }
+
         // GetAllMiniModelsOfState
+        /// <summary>
+        /// the below method brings up to the user all minimodels oh a sepcified buildstate items currently in their table
+        /// </summary>
+        /// <param name="buildState">takes a buildstate enum</param>
+        /// <param name="email">a string for the the email</param>
+        /// <returns></returns>
         public async Task<List<MiniModelDTO>> GetAMiniModelOfState(BuildState buildState, string email)
         {
             List<MiniModel> miniList = await _context.MiniModels.Where(x => x.BuildState == buildState && x.Email == email)
@@ -139,9 +142,9 @@ namespace HobbyListForHobbyist.Models.Services
                     Id = mini.Id,
                     Name = mini.Name,
                     Manufacturer = mini.Manufacturer,
+                    PartNumber = mini.PartNumber,
                     Faction = mini.Faction,
                     PointCost = mini.PointCost,
-                    // ============= Here =================
                     BuildState = mini.BuildState.ToString(),
                     Paints = paints,
                     Supplies = supplies
@@ -195,9 +198,9 @@ namespace HobbyListForHobbyist.Models.Services
                     Id = mini.Id,
                     Name = mini.Name,
                     Manufacturer = mini.Manufacturer,
+                    PartNumber = mini.PartNumber,
                     Faction = mini.Faction,
                     PointCost = mini.PointCost,
-                    // ======================= HERE =============
                     BuildState = mini.BuildState.ToString(),
                     Paints = paints,
                     Supplies = supplies
@@ -207,6 +210,7 @@ namespace HobbyListForHobbyist.Models.Services
 
             return miniDTOList;
         }
+
         // UpdateAMiniModel
         /// <summary>
         /// the below method updates a particular minimodel item in the database
@@ -214,8 +218,6 @@ namespace HobbyListForHobbyist.Models.Services
         /// <param name="supplyDTO">this selects the minimodel DTO (what parameters are shown to user)</param>
         /// <param name="email">checks to see if user has authorization for selected minimodel item</param>
         /// <returns>the minimodel dto with the updated minimodel item</returns>
-
-
         public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email)
         {
             Enum.TryParse(miniModel.BuildState, out BuildState buildState);
@@ -228,7 +230,6 @@ namespace HobbyListForHobbyist.Models.Services
                 PartNumber = miniModel.PartNumber,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                // ================ HERE ==================
                 BuildState = buildState,
                 Email = email
             };

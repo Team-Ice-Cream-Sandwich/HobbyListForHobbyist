@@ -66,29 +66,32 @@ dotnet run
 
 ---
 
-## Usage TODO
+## Usage
 
-### Overview of Recent Posts
-![Overview of Recent Posts](https://via.placeholder.com/500x250)
+### All Available Routes
+![Routes](assets/Images/AllRoutes.png)
 
-### Creating a Post
-![Post Creation](https://via.placeholder.com/500x250)
+### View All Miniatures the User Has
+![View All Models](assets/Images/GetAllMinis.png)
 
-### Enriching a Post
-![Enriching Post](https://via.placeholder.com/500x250)
+### View All Miniatures the User Has that are of selected buildstate
+![View Models of Buildstate](assets/Images/GetMinisOfState.png)
 
-### Viewing Post Details
-![Details of Post](https://via.placeholder.com/500x250)
+### Adding A paint to a model
+![Adding A paint to a model](assets/Images/AddAPaintToAmodel.png)
+
+### Updating a model
+![Updating A Model](assets/Images/UpdateAModel.png)
 
 ---
-## Data Flow (Frontend, Backend, REST API) TODO
-![Data Flow Diagram](/assets/img/Flowchart.png)
+## Data Flow
+![Data Flow Diagram](assets/HLFHDomainModel.png)
 
 ---
 ## Data Model TODO
 
-### Overall Project Schema TODO
-![Database Schema](/assets/img/ERD.png)
+### Overall Project Schema
+![Database Schema](assets/HLFHERD.png)
 
 ---
 ## Model Properties and Requirements TODO
@@ -104,7 +107,7 @@ dotnet run
  Faction | string
  PointCost | int
  BuildState | (enum)
- UserId | string
+ Email | string
 
 ### Paints
 
@@ -114,19 +117,36 @@ Id  | int
 ColorName | string
 Manufacturer | string
 ProductNumber | string
-UserId | string
+Email | string
 
 ### Supplies
 Parameter | Type
 --- | ---
 Name | string
 Category | string
-UserId | string
+Email | string
+
+### MiniWishList
+
+ Parameter | Type 
+ --- | --- 
+ Id  | int 
+ Name | string 
+ Manufacturer | string
+ PartNumber | string
+ Faction | string
+ PointCost | int
+ Price | string
+ Email | string
 
 
 ---
 
 ## Change Log
+- 1.20 Front Page Complete.
+- 1.10 Test suite complete and bugs eradicated. 
+- 1.00 Functional but slightly buggy MVP
+- 0.90 User Id changed to User Email
 - 0.80 User Id Added
 - 0.70 Supply, Paint and MiniModel controllers finished
 - 0.60 Interfaces and Services
