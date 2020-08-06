@@ -34,7 +34,7 @@ namespace HobbyListForHobbyist.Models.Services
         public async Task<MiniModelDTO> Create(MiniModelDTO miniModel, string email)
         {
             //========================= TODO Test user ID =========================
-            Enum.TryParse(miniModel.BuildState, out BuildState buildState);
+            //Enum.TryParse(miniModel.BuildState, out BuildState buildState);
 
             MiniModel entity = new MiniModel()
             {
@@ -43,7 +43,8 @@ namespace HobbyListForHobbyist.Models.Services
                 PartNumber = miniModel.PartNumber,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                BuildState = buildState,
+                // ========== HERE ==================
+                BuildState = miniModel.BuildState,
                 Email = email                
             };
 
@@ -92,9 +93,11 @@ namespace HobbyListForHobbyist.Models.Services
                 Id = miniModel.Id,
                 Name = miniModel.Name,
                 Manufacturer = miniModel.Manufacturer,
+                PartNumber = miniModel.PartNumber,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                BuildState = miniModel.BuildState.ToString(),
+                // ================ HERE ==================
+                BuildState = miniModel.BuildState,
                 Paints = paints,
                 Supplies = supplies
             };
@@ -138,7 +141,8 @@ namespace HobbyListForHobbyist.Models.Services
                     Manufacturer = mini.Manufacturer,
                     Faction = mini.Faction,
                     PointCost = mini.PointCost,
-                    BuildState = mini.BuildState.ToString(),
+                    // ============= Here =================
+                    BuildState = mini.BuildState,
                     Paints = paints,
                     Supplies = supplies
                 }
@@ -193,7 +197,8 @@ namespace HobbyListForHobbyist.Models.Services
                     Manufacturer = mini.Manufacturer,
                     Faction = mini.Faction,
                     PointCost = mini.PointCost,
-                    BuildState = mini.BuildState.ToString(),
+                    // ======================= HERE =============
+                    BuildState = mini.BuildState,
                     Paints = paints,
                     Supplies = supplies
                 }
@@ -213,16 +218,18 @@ namespace HobbyListForHobbyist.Models.Services
 
         public async Task<MiniModelDTO> Update(MiniModelDTO miniModel, int id, string email)
         {
-            Enum.TryParse(miniModel.BuildState, out BuildState buildState);
+            // Enum.TryParse(miniModel.BuildState, out BuildState buildState);
 
             MiniModel updatedMiniModel = new MiniModel()
             {
                 Id = miniModel.Id,
                 Name = miniModel.Name,
                 Manufacturer = miniModel.Manufacturer,
+                PartNumber = miniModel.PartNumber,
                 Faction = miniModel.Faction,
                 PointCost = miniModel.PointCost,
-                BuildState = buildState,
+                // ================ HERE ==================
+                BuildState = miniModel.BuildState,
                 Email = email
             };
 

@@ -27,7 +27,7 @@ namespace HobbyListTests
                 PartNumber = "PP1234",
                 Faction = "Cygnar",
                 PointCost = 38,
-                BuildState = "Built"
+                BuildState = BuildState.built
             };
 
             var service = BuildService();
@@ -36,6 +36,10 @@ namespace HobbyListTests
 
             Assert.NotNull(saved);
             Assert.Equal(miniModel.Name, saved.Name);
+            Assert.Equal(miniModel.Manufacturer, saved.Manufacturer);
+            Assert.Equal(miniModel.PartNumber, saved.PartNumber);
+            Assert.Equal(miniModel.Faction, saved.Faction);
+            Assert.Equal(miniModel.PointCost, saved.PointCost);
             Assert.Equal(miniModel.BuildState, saved.BuildState);
         }
 
@@ -113,15 +117,20 @@ namespace HobbyListTests
                 Name = "IronClad",
                 Manufacturer = "Privateer Press",
                 PartNumber = "PP0987",
+                Faction = "Cygnar",
                 PointCost = 40,
-                BuildState = "Painted"
+                BuildState = BuildState.painted
             };
 
             await service.Update(miniModel, 1, testEmail);
             var returnFromMethod = await service.GetMiniModel(1, testEmail);
 
             Assert.NotNull(returnFromMethod);
+            Assert.Equal(miniModel.Id, returnFromMethod.Id);
             Assert.Equal(miniModel.Name, returnFromMethod.Name);
+            Assert.Equal(miniModel.PartNumber, returnFromMethod.PartNumber);
+            Assert.Equal(miniModel.PointCost, returnFromMethod.PointCost);
+            Assert.Equal(miniModel.BuildState, returnFromMethod.BuildState);
         }
 
         [Fact]

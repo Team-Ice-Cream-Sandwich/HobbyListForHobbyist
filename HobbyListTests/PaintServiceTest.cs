@@ -34,6 +34,8 @@ namespace HobbyListTests
 
             Assert.NotNull(saved);
             Assert.Equal(paint.ColorName, saved.ColorName);
+            Assert.Equal(paint.Manufacturer, saved.Manufacturer);
+            Assert.Equal(paint.ProductNumber, saved.ProductNumber);
         }
 
         [Fact]
@@ -92,7 +94,10 @@ namespace HobbyListTests
             var returnFromMethod = await service.GetPaint(1, testEmail);
 
             Assert.NotNull(returnFromMethod);
+            Assert.Equal(paint.Id, returnFromMethod.Id);
             Assert.Equal(paint.ColorName, returnFromMethod.ColorName);
+            Assert.Equal(paint.Manufacturer, returnFromMethod.Manufacturer);
+            Assert.Equal(paint.ProductNumber, returnFromMethod.ProductNumber);
         }
 
         [Fact]

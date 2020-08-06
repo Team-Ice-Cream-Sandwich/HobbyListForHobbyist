@@ -32,6 +32,7 @@ namespace HobbyListTests
 
             Assert.NotNull(saved);
             Assert.Equal(supply.Name, saved.Name);
+            Assert.Equal(supply.Category, saved.Category);
         }
 
         [Fact]
@@ -89,7 +90,9 @@ namespace HobbyListTests
             var returnFromMethod = await service.GetSupply(1, testEmail);
 
             Assert.NotNull(returnFromMethod);
+            Assert.Equal(supply.Id, returnFromMethod.Id);
             Assert.Equal(supply.Name, returnFromMethod.Name);
+            Assert.Equal(supply.Category, returnFromMethod.Category);
         }
 
         [Fact]
