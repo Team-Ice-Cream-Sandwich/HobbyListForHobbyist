@@ -8,12 +8,14 @@ namespace HobbyListForHobbyist.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        // Table Properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 
     public static class ApplicationRoles
     {
+        // Define the application's role names
         public const string Admin = "Admin";
         public const string User = "User";
     }

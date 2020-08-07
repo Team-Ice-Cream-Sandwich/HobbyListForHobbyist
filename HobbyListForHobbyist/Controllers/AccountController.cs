@@ -27,6 +27,12 @@ namespace HobbyListForHobbyist.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _config;
 
+        /// <summary>
+        /// Require Dependency injection from UserManger, SignInManger, and IConfiguration
+        /// </summary>
+        /// <param name="userManager">UserManager<T> Object</param>
+        /// <param name="signInManager">SignInManager<T> Object</T></param>
+        /// <param name="configuration">IConfiguration Interface</param>
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
@@ -34,8 +40,12 @@ namespace HobbyListForHobbyist.Controllers
             _config = configuration;
         }
 
-        // register
-        // POST: api/account/register
+        /// <summary>        
+        /// register a new user. Anyone can use this route.
+        /// POST: api/account/register
+        /// </summary>
+        /// <param name="register">RegisterDTO Object</param>
+        /// <returns>IActionResults</returns>
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterDTO register)
@@ -60,9 +70,13 @@ namespace HobbyListForHobbyist.Controllers
             }
             return BadRequest("Invalid Registration");
         }
-
-        // Login
-        // POST: api/account/Login
+               
+        /// <summary>
+        /// Allows a user to login. Anyone can use this route.
+        /// POST: api/account/Login
+        /// </summary>
+        /// <param name="login">LoginDTO Object</param>
+        /// <returns>ActionResult</returns>
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<ActionResult> Login(LoginDTO login)
@@ -86,8 +100,12 @@ namespace HobbyListForHobbyist.Controllers
             return BadRequest("Invalid Attempt");
         }
 
-        // assign roles
-        // POST: api/assign/role
+        /// <summary>         
+        /// Allows an Admin to assign a new role. Only Admin accounts can use this route.
+        /// POST: api/assign/role
+        /// </summary>
+        /// <param name="assignment">AssignRoleDTO</param>
+        /// <returns>Async Version of Void</returns>
         [HttpPost("assign/role")]
         [Authorize(Policy = "AdminPrivileges")]
         public async Task AssignRoleToUser(AssignRoleDTO assignment)
@@ -97,7 +115,12 @@ namespace HobbyListForHobbyist.Controllers
             await _userManager.AddToRoleAsync(user, assignment.Role);
         }
 
-        //Create Token
+        /// <summary>        
+        /// Creates a new JWT Token
+        /// </summary>
+        /// <param name="user">ApplicationUser Object</param>
+        /// <param name="role">List of roles</param>
+        /// <returns>JwtSecurityToken</returns>
         private JwtSecurityToken CreateToken(ApplicationUser user, List<string> role)
         {            
             var authClaims = new List<Claim>()
@@ -120,7 +143,11 @@ namespace HobbyListForHobbyist.Controllers
             return token;
         }
 
-        // Authenticate a Token
+        /// <summary>        
+        /// Authenticate a JWT Token
+        /// </summary>
+        /// <param name="claims">List of claims</param>
+        /// <returns>JwtSecurityToken</returns>
         private JwtSecurityToken AuthenticationToken(List<Claim> claims)
         {
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWTKey"]));
