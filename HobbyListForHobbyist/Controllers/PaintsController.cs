@@ -22,6 +22,11 @@ namespace HobbyListForHobbyist.Controllers
         private readonly IPaint _paint;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        /// <summary>
+        /// Injecting the IPaint interface and application user model
+        /// </summary>
+        /// <param name="paint"> IPaint interface</param>
+        /// <param name="userManager"> ApplicationUser</param>
         public PaintsController(IPaint paint, UserManager<ApplicationUser> userManager)
         {
             _paint = paint;
@@ -31,6 +36,11 @@ namespace HobbyListForHobbyist.Controllers
         // POST: api/Paints
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Creates a new paint
+        /// </summary>
+        /// <param name="paintdto"> dto object</param>
+        /// <returns> created paintdto object </returns>
         [HttpPost]
         public async Task<ActionResult<Paint>> PostPaint(PaintDTO paintdto)
         {
@@ -39,6 +49,10 @@ namespace HobbyListForHobbyist.Controllers
         }
 
         // GET: api/Paints
+        /// <summary>
+        /// Gets all  paints
+        /// </summary>
+        /// <returns> all paintdto objects </returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PaintDTO>>> GetPaints()
         {
@@ -46,6 +60,11 @@ namespace HobbyListForHobbyist.Controllers
         }
 
         // GET: api/Paints/5
+        /// <summary>
+        /// Gets an Paint object by an id
+        /// </summary>
+        /// <param name="id">integer for id</param>
+        /// <returns> a single paintdto object</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<PaintDTO>> GetPaint(int id)
         {
@@ -62,6 +81,12 @@ namespace HobbyListForHobbyist.Controllers
         // PUT: api/Paints/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Updates a paint
+        /// </summary>
+        /// <param name="id">integer for id</param>
+        /// <param name="paintdto"> dto object</param>
+        /// <returns> an updated paintdto object</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPaint(int id, PaintDTO paintdto)
         {
@@ -76,6 +101,11 @@ namespace HobbyListForHobbyist.Controllers
         }
 
         // DELETE: api/Paints/5
+        /// <summary>
+        /// Deletes a paint
+        /// </summary>
+        /// <param name="id">integer for id</param>
+        /// <returns> could not find deleted paint</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<PaintDTO>> DeletePaint(int id)
         {
@@ -83,10 +113,18 @@ namespace HobbyListForHobbyist.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// gets the user id when a user logs in
+        /// </summary>
+        /// <returns> the user id</returns>
         protected string GetUserId()
         {
             return User.Claims.First(x => x.Type == "UserId").Value;
         }
+        /// <summary>
+        /// gets users email when user logs in
+        /// </summary>
+        /// <returns> the users email</returns>
         protected string GetUserEmail()
         {
             return User.Claims.First(x => x.Type == "Email").Value;

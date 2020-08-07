@@ -23,6 +23,9 @@ namespace HobbyListForHobbyist.Models
     }
 }
 
+/// <summary>
+/// The stages that a minIModel goes in when being built
+/// </summary>
 public enum BuildState
 {
     unBuilt = 0,
