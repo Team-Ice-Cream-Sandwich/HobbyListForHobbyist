@@ -35,13 +35,7 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 - Entity Framework
 - MVC
 
----
-
-## Recent Updates
-
----
-
-## Getting Started TODO
+## Getting Started
 
 Clone this repository to your local machine.
 
@@ -85,16 +79,16 @@ dotnet run
 
 ---
 ## Data Flow
-![Data Flow Diagram](assets/HLFHDomainModel.png)
+![Data Flow Diagram](assets/DomainPresentation401mid.png)
 
 ---
-## Data Model TODO
+## Data Model
 
 ### Overall Project Schema
-![Database Schema](assets/HLFHERD.png)
+![Database Schema](assets/ERD.png)
 
 ---
-## Model Properties and Requirements TODO
+## Model Properties and Requirements
 
 ### MiniModel
 
@@ -143,6 +137,7 @@ Email | string
 ---
 
 ## Change Log
+- 1.30 Summary Comments
 - 1.20 Front Page Complete.
 - 1.10 Test suite complete and bugs eradicated. 
 - 1.00 Functional but slightly buggy MVP
