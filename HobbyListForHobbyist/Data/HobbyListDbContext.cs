@@ -10,18 +10,29 @@ namespace HobbyListForHobbyist.Data
 {
     public class HobbyListDbContext : IdentityDbContext<ApplicationUser>
     {
+        /// <summary>
+        /// Since we are inheriting from IdentityDbContext we need to bring in the base constructor.
+        /// </summary>
+        /// <param name="options">DbContextOptions</param>
         public HobbyListDbContext(DbContextOptions<HobbyListDbContext> options) : base(options)
         {
             // Intentionally left Blank
         }
 
+        /// <summary>
+        /// When the model is created define these attributes.
+        /// </summary>
+        /// <param name="modelBuilder">ModelBuilder</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Define the primary key for the Identity stuff
             base.OnModelCreating(modelBuilder);
 
+            // Define the composite keys for the entity join tables
             modelBuilder.Entity<MiniToPaint>().HasKey(x => new { x.MiniModelId, x.PaintId });
             modelBuilder.Entity<MiniToSupply>().HasKey(x => new { x.MiniModelId, x.SupplyId });
 
+            // Seed the database with this content
             modelBuilder.Entity<MiniModel>().HasData(
                  new MiniModel
                  {
@@ -139,6 +150,7 @@ namespace HobbyListForHobbyist.Data
 
         }
 
+        // Connect the DbContext to the database tables.
         public DbSet<MiniModel> MiniModels { get; set; }
         public DbSet<MiniWishList> MiniWishLists { get; set; }
         public DbSet<MiniToPaint> MinisToPaint { get; set; }
